@@ -14,7 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
     implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable , TwoFactorAuthenticatable , HasRoles;
+    use HasApiTokens, HasFactory, Notifiable  , HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -35,8 +35,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'two_factor_secret',
-        'two_factor_recovery_codes',
     ];
 
     /**

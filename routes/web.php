@@ -7,6 +7,7 @@ use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------

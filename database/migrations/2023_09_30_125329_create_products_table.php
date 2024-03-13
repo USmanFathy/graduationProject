@@ -13,17 +13,19 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('store_id')->constrained('stores')->cascadeOnDelete();
             $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->string('image')->nullable();
+            $table->string('attachment')->nullable();
             $table->float('price')->default(0);
-            $table->float('compare_price')->nullable();
-            $table->json('options')->nullable();
+            $table->string('author');
+            $table->string('reference_number');
+
             $table->float('rating')->default(0);
             $table->boolean('featured')->default(0);
+            $table->enum('type',['pdf','real_book'])->default('pdf');
             $table->enum('status' , ['active' ,'draft', 'archived'])->default('active');
             $table->timestamps();
             $table->softDeletes();

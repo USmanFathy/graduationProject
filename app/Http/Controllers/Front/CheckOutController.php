@@ -37,14 +37,14 @@ class CheckOutController extends Controller
 
 
         ]);
-        $order_store = $cart->get()->groupBy('product.store_id')->all();
+        $order_author = $cart->get()->groupBy('product.author')->all();
 //        dd($order_store);
         DB::beginTransaction();
         try {
 
-            foreach ($order_store as $store_id => $product){
+
+            foreach ($order_author as $store_id => $product){
                 $order = Order::create([
-                    'store_id' => $store_id ,
                     'user_id' => auth()->id(),
                     'payment_method' =>'cod',
                 ]);
