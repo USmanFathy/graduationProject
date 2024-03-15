@@ -18,6 +18,7 @@ return new class extends Migration
                 ->constrained('categories' ,'id')
                 ->nullOnDelete();// unsiged big integer relation enternal
             $table->string('name');
+            $table->boolean('featured')->default(0);
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->string('image')->nullable();

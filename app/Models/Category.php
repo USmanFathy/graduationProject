@@ -30,6 +30,11 @@ class  Category extends Model
 //        $builder->where('status','=',$status);
 //    }
 
+    public function subcategories()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+
     public function ScopeSearch(Builder $builder ,$filters){
             $builder->when($filters['name'] ?? false , function ($builder , $value){
                 $builder->where('categories.name','LIKE' , "%{$value}%");

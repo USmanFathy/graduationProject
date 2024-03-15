@@ -23,6 +23,7 @@ class CategoryFactory extends Factory
             'slug' => Str::slug($name),
             'description' => $this->faker->sentence(15),
             'image'  =>$this->faker->imageUrl(),
+            'featured'    => rand(0,1),
 
         ];
     }
