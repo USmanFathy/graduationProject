@@ -1,16 +1,14 @@
 @extends('layouts.dashboard')
-@section('title_section' ,'Products')
+@section('title_section' ,'Books')
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">Products</li>
+    <li class="breadcrumb-item active">Books</li>
 @endsection
 @section('content')
 
 
     <div class="mb-5">
-        @can('products.create')
         <a href="{{route('products.create')}}" class="btn btn-sm btn-outline-primary mr-2">Create</a>
-        @endcan
         <a href="{{route('products.trash')}}" class="btn btn-sm btn-outline-dark">Trash</a>
     </div>
     <x-alert type="success"/>
@@ -51,16 +49,13 @@
                 <td>{{$product->id}}</td>
                 <td>{{$product->name}}</td>
                 <td>{{$product->category->name ?? ""}}</td>
-                <td>{{$product->store->name}}</td>
                 <td>{{Currency::format($product->price)}}</td>
                 <td>{{$product->status}}</td>
                 <td>{{$product->created_at}}</td>
-                @can('products.update')
                 <td>
                     <a href="{{route('products.edit' , $product->id)}}" class="btn btn-sm btn-outline-success">Edit</a>
                 </td>
-                @endcan
-                @can('$products.delete')
+
                 <td>
                     <form action="{{route('products.destroy' , $product->id)}}" method="post">
                         @csrf
@@ -71,7 +66,6 @@
 
                     </form>
                 </td>
-                @endcan
             </tr>
         @empty
             <tr>

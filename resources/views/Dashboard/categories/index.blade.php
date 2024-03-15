@@ -31,7 +31,7 @@
             <th>Id</th>
             <th>Name</th>
             <th>Parent</th>
-            <th>Products</th>
+            <th>Books</th>
             <th>Status</th>
             <th>Created At</th>
             <th colspan="2"></th>

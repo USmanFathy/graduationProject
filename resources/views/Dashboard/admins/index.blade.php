@@ -8,9 +8,7 @@
 
 
     <div class="mb-5">
-        @can('admins.create')
         <a href="{{route('admins.create')}}" class="btn btn-sm btn-outline-primary mr-2">Create</a>
-        @endcan
     </div>
     <x-alert type="success"/>
     <x-alert type="info"/>
@@ -52,12 +50,9 @@
                 <td>{{$admin->phone_number}}</td>
                 <td>{{$admin->status}}</td>
                 <td>{{$admin->created_at}}</td>
-                @can('admins.update')
                 <td>
                     <a href="{{route('admins.edit' , $admin->id)}}" class="btn btn-sm btn-outline-success">Edit</a>
                 </td>
-                @endcan
-                @can('$admins.delete')
                 <td>
                     <form action="{{route('admins.destroy' , $admin->id)}}" method="post">
                         @csrf
@@ -68,7 +63,6 @@
 
                     </form>
                 </td>
-                @endcan
             </tr>
         @empty
             <tr>

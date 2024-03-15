@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Scopes\StoreScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +12,7 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable =[
-        'name' , 'category_id' , 'author' , 'image','price', 'description','status','reference_number','type'
+        'name' , 'category_id' , 'author' , 'image','price', 'description','status','reference_number','type','attachment'
     ];
 
     protected $hidden =
@@ -21,7 +20,8 @@ class Product extends Model
             'created_at' ,'updated_at' , 'deleted_at','image'
         ];
     protected $appends =[
-        'image_url'
+        'image_url',
+        'attachment_url'
     ];
     protected static function booted()
     {
@@ -40,16 +40,6 @@ class Product extends Model
     }
 
 
-    public function tags()
-    {
-        return $this->belongsToMany(
-            Tag::class , // related model
-            'product_tag' , // pivot table name
-            'product_id', // fk in pivot table current model
-            'tag_id' , // fk in pivot table for related model
-            'id' ,        // pk current model
-            'id');          // pk related model
-    }
     public function ScopeSearch(Builder $builder ,$filters){
         $builder->when($filters['name'] ?? false , function ($builder , $value){
             $builder->where('products.name','LIKE' , "%{$value}%");
@@ -74,6 +64,16 @@ class Product extends Model
         }
 
         return asset('storage/'.$this->image);
+
+
+    }
+    public function getAttachmentUrlAttribute()
+    {
+        if (!$this->attachment){
+            return '';
+        }
+
+        return asset('storage/'.$this->attachment);
 
 
     }
