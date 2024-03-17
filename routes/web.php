@@ -31,8 +31,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 /////////////////////////////////////////////////////////////////////////////////////////
     Route::middleware(['throttle:50,1'])->group(function () {
-        Route::get('/products', [ProductController::class, 'index'])->name('front.products.index');
-        Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('front.products.show');
+        Route::get('/products', [ProductController::class, 'index'])
+            ->name('front.products.index');
+        Route::get('/products/{product:slug}', [ProductController::class, 'show'])
+            ->name('front.products.show');
+        Route::get('/products/{category:slug}/filter', [ProductController::class, 'productsFilters'])
+            ->name('products_filter');
     });
 /////////////////////////////////////////////////////////////////////////////////////////
     Route::resource('cart', CartController::class);
@@ -45,4 +49,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
 });
 require __DIR__.'/dashboard.php';
 //require __DIR__.'/auth.php';
+
+
+Route::get('test', function(){
+   return view('test');
+});
 
