@@ -18,23 +18,12 @@ class HomeController extends Controller
             ->get();
         $productSlider = Product::where('featured','=',1)->paginate(15);
 //        $futureCategory = Category::where('featured','=',1)->paginate(10);
+
         $categories = Category::with('subcategories')
             ->where('featured', 1)
             ->whereNull('parent_id')
             ->paginate(5)
         ;
-
-        $hierarchicalCategories = [];
-
-        foreach ($categories as $category) {
-            $categoryGroup = [
-                'category' => $category,
-                'subcategories' => $category->subcategories
-            ];
-
-            $hierarchicalCategories[] = $categoryGroup;
-        }
-
 
 
         return view(
@@ -42,7 +31,7 @@ class HomeController extends Controller
             [
                 'products' => $products,
                 'productSlider' => $productSlider,
-                'hierarchicalCategories' => $hierarchicalCategories
+                'categories' => $categories
             ]
         );
     }
