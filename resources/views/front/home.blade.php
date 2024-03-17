@@ -45,20 +45,20 @@
                 </div>
             </div>
             <div class="row">
-                @foreach ($hierarchicalCategories as $categoryGroup)
+                @foreach ($categories as $category)
 
                     <div class="col-lg-4 col-md-6 col-12">
                         <!-- Start Single Category -->
                         <div class="single-category">
-                            <h3 class="heading">{{ $categoryGroup['category']->name }}</h3>
+                            <h3 class="heading"> <a href="{{ route('products_filter',$category,$category->slug) }}" >{{ $category->name }}</a></h3>
                             <ul>
-                                @foreach ($categoryGroup['subcategories'] as $subcategory)
+                                @foreach ($category['subcategories'] as $subcategory)
 
-                                    <li>{{ $subcategory->name }}</li>
+                                    <li><a href="{{ route('products_filter',$subcategory,$subcategory->slug) }}" >{{ $subcategory->name }}</a></li>
                                 @endforeach
                             </ul>
                             <div class="images">
-                                <img src="{{$categoryGroup['category']->image}}" width="150px" height="150px" alt="#">
+                                <img src="{{$category->image}}" width="150px" height="150px" alt="#">
                             </div>
                         </div>
                         <!-- End Single Category -->
