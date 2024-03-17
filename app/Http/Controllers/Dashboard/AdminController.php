@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Symfony\Component\Intl\Countries;
+use Symfony\Component\Intl\Languages;
 
 class AdminController extends Controller
 {
@@ -14,7 +16,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admins = Admin::paginate();
+        $admins = Admin::whereId('id',auth()->guard('admin')->user()->id)->paginate();
 
         return view('Dashboard.admins.index' ,['admins'=>$admins]);
     }
@@ -24,7 +26,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('Dashboard.admins.create' ,['admin'=>new  Admin() , 'roles'=>Role::all()]);
+
+        return view('Dashboard.admins.create' ,['admin'=>new  Admin()]);
     }
 
     /**
@@ -37,7 +40,6 @@ class AdminController extends Controller
         ]);
 
         $admin = Admin::create($request);
-        $admin->roles()->attach($request->roles);
         return redirect()->route('admins.index')
             ->with('success' ,'Admin Created Successfully');
     }
@@ -55,7 +57,9 @@ class AdminController extends Controller
      */
     public function edit(Admin $admin)
     {
-        return view('Dashboard.admins.edit' ,['admin'=>$admin ]);
+        $countries = Countries::getNames('EN');
+        $locals = Languages::getNames('EN');
+        return view('Dashboard.admins.edit' ,['admin'=>$admin,'countries'=>$countries ,'locals'=>$locals ]);
     }
 
     /**
@@ -68,7 +72,6 @@ class AdminController extends Controller
         ]);
 
         $admin->update($request);
-        $admin->roles()->sync($request->roles);
 
         return redirect()->route('admins.index')
             ->with('success' ,'Admin Updated Successfully');

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Languages;
 
@@ -14,7 +16,7 @@ class ProfileController extends Controller
     {
         $countries = Countries::getNames('EN');
         $locals = Languages::getNames('EN');
-        $user = auth()->user();
+        $user = auth()->guard('admin')->user();
         return view('Dashboard.profile.edit',compact('user','countries' ,'locals'));
     }
 
@@ -27,18 +29,10 @@ class ProfileController extends Controller
             'gender'   =>['in:male,female'],
             'country'  =>['required' , 'string' ,'size:2']
         ]);
-        $user = $request->user();
-        $profile =$user->profile;
-        $profile->fill($request->all())->save();
-//        if($profile->first_name){
-//            $profile->update($request->all());
-//        }else{
-////            $request->merge([
-////                'user_id' => $user->id,
-////            ]);
-////            Profile::create($request->all());
-//            $user->profile()->create($request->all());
-//        }
-        return redirect()->route('dashboard.profile.edit')->with('success' , 'Profile Updated!');
+        $admin =auth()->guard('admin')->user();
+        $admin->update($request->all());
+
+        return redirect()->route('dashboard')
+            ->with('success' ,'Admin Updated Successfully');
     }
 }

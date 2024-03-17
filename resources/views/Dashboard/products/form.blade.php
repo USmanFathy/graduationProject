@@ -1,9 +1,17 @@
 @push('css')
     <link rel="stylesheet" href="{{asset('dist/css/tagify.css')}}">
 @endpush
-<div class="form-group">
-    <x-form.label for="name">Product Name</x-form.label>
+    <div class="form-group">
+    <x-form.label for="name">Book Name</x-form.label>
     <x-form.input name="name" :value="$product->name" />
+    </div>
+    <div class="form-group">
+    <x-form.label for="author">Author Name</x-form.label>
+    <x-form.input name="author" :value="$product->author" />
+    </div>
+<div class="form-group">
+    <x-form.label for="reference_number">Reference Name</x-form.label>
+    <x-form.input name="reference_number" :value="$product->reference_number" />
     </div>
     <div class="form-group">
         <x-form.label for="product_id">Category Name</x-form.label>
@@ -35,14 +43,12 @@
         </div>
         @enderror
     </div>
+
 <div class="form-group">
     <x-form.label for="name">price</x-form.label>
     <x-form.input name="price" :value="$product->price" />
 </div>
-<div class="form-group">
-    <x-form.label for="name">Compare Price</x-form.label>
-    <x-form.input name="compare_price" :value="$product->compare_price" />
-</div>
+
 <div class="form-group">
     <x-form.label for="name">Tags</x-form.label>
 
@@ -52,6 +58,25 @@
     <x-form.label for="status">Status</x-form.label>
 
     <x-form.checkbox  name="status" :options="['active' =>'Active' , 'draft'=>'Draft','archived' => 'Archived']" :checked="$product->status" />
+</div>
+<div class="form-group">
+    <x-form.label for="type">Book Type</x-form.label>
+
+    <x-form.checkbox  name="type" :options="['pdf' =>'PDF' , 'real_book'=>'Book']" :checked="$product->type" />
+</div>
+<div class="form-group">
+    <x-form.label for="attachment">Attachment</x-form.label>
+    <x-form.input type="file" name="attachment" />
+    @if($product->attachment )
+
+        <a href="{{$product->attachment_url}}" download>Show PDF </a>
+
+    @endif
+    @error('attachment')
+    <div class="invalid-feedback">
+        {{$message}}
+    </div>
+    @enderror
 </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">{{$button_label}}</button>

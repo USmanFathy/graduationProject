@@ -12,12 +12,9 @@
         <!-- Sidebar user panel (optional) -->
       @auth()
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
-                </div>
                 <div class="info">
-                    <a href="{{route('dashboard.profile.edit')}}" class="d-block">{{auth()->guard('admin')->user()->name}}</a>
-                    <form action="{{route('logout')}}" method="post">
+                    <a href="{{route('dashboard.profile.edit')}}" class="d-block mb-4">{{auth()->guard('admin')->user()->username}}</a>
+                    <form action="{{route('logout')}}" method="post" >
                         @csrf
 
                         <button type="submit" class="btn btn-outline-primary">logout</button>
@@ -27,17 +24,6 @@
         @endauth
 
         <!-- SidebarSearch Form -->
-        <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search"
-                       aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
 
         <x-nav/>
     </div>

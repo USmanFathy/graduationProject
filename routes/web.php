@@ -45,7 +45,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
     Route::post('/checkout/store', [CheckOutController::class, 'store'])->name('checkout.store');
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    Route::get('/auth/2fa', [TwoFactorAuthController::class, 'index']);
 });
 require __DIR__.'/dashboard.php';
 //require __DIR__.'/auth.php';

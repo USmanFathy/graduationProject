@@ -19,10 +19,7 @@ class ProductController extends Controller
     public function index()
     {
         $request = request();
-        $products = Product::with(['category' , 'store'])->search($request->query())->paginate();
-        // select all from products
-        // select all from categories where id in (*)
-        // select all from stores where id in (*)
+        $products = Product::with(['category' ])->search($request->query())->paginate();
 
         return view('Dashboard.products.index' , compact('products'));
     }
@@ -48,41 +45,26 @@ class ProductController extends Controller
             'name'      =>'required|string|min:3|max:255',
 
             'image'    =>[
-                'image','max:1048576','dimensions:min_width=150 , min_height=100'
+                'image',
             ],
-            'status' => 'in:active,archived,draft'
+            'status' => 'in:active,archived,draft',
+            'attachment' => 'required_if:type,==,pdf'
         ]);
         $request->merge([
             'slug'=>Str::slug($request->post('name')),
         ]);
         $data = $request->except('image' );
+        $pdf = $request->except('attachment' );
+        if ($pdf){
+            $pathPdf=$this->uploadPdf($request);
+            $data['attachment'] = $pathPdf;
+        }
         $path=$this->uploadImage($request);
 
         if ($path){
             $data['image'] = $path;
         }
-        $product = Product::create($data);
-        $tags = json_decode($request->post('tags'));
-        if ($tags){
-            $saved_tags = Tag::all();
-            foreach ($tags as $t_name)
-            {
-                $slug = Str::slug($t_name->value);
-                $tag = $saved_tags->where('slug' , $slug)->first();
-                if(!$tag){
-                    $tag = Tag::create([
-                        'name' => $t_name->value ,
-                        'slug' => $slug
-                    ]);
-
-                }
-                $tags_id[] = $tag->id;
-            }
-
-            $product->tags()->sync($tags_id);
-        }
-
-
+         Product::create($data);
 
         return redirect()->route('products.index')->with('success' , 'Product Created!');
 
@@ -112,7 +94,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-                $request->validate([
+        $request->validate([
             'name'      =>'required|string|min:3|max:255',
 
             'image'    =>[
@@ -121,8 +103,14 @@ class ProductController extends Controller
             'status' => 'in:active,archived,draft'
         ]);
         $old_image = $product->image;
+        $old_attachment = $product->attachment;
         $data = $request->except('image' );
         $path=$this->uploadImage($request);
+        $pdf = $request->except('attachment' );
+        $pathPdf = $this->uploadPdf($request);
+        if ($pdf){
+            $data['attachment'] = $pathPdf;
+        }
 
         if ($path){
             $data['image'] = $path;
@@ -131,29 +119,9 @@ class ProductController extends Controller
 
         $product->update($data);
 
-
-        $tags = json_decode($request->post('tags'));
-
-
-        if ($tags){
-            $saved_tags = Tag::all();
-            foreach ($tags as $t_name)
-            {
-                $slug = Str::slug($t_name->value);
-                $tag = $saved_tags->where('slug' , $slug)->first();
-                if(!$tag){
-                    $tag = Tag::create([
-                        'name' => $t_name->value ,
-                        'slug' => $slug
-                    ]);
-
-                }
-                $tags_id[] = $tag->id;
-            }
-
-            $product->tags()->sync($tags_id);
+        if($old_attachment && $pathPdf){
+            Storage::disk('public')->delete($old_attachment);
         }
-
 
         if($old_image && $path){
             Storage::disk('public')->delete($old_image);
@@ -178,7 +146,17 @@ class ProductController extends Controller
             return;
         }
         $file =$request->file('image'); //uploaded file
-        $path =$file->storeAs('Products/'.$request->name ,$file->getClientOriginalName(), 'public');
+        $path =$file->storeAs('Products/'.$request->name ."/images/",$file->getClientOriginalName(), 'public');
+
+        return $path ;
+    }
+    protected function uploadPdf(Request $request)
+    {
+        if (!$request->hasFile('attachment')) {
+            return;
+        }
+        $file =$request->file('attachment'); //uploaded file
+        $path =$file->storeAs('Products/'.$request->name."/attachments/" ,$file->getClientOriginalName(), 'public');
 
         return $path ;
     }
