@@ -50,7 +50,4 @@ require __DIR__.'/dashboard.php';
 //require __DIR__.'/auth.php';
 
 
-Route::get('test', function(){
-   return view('test');
-});
 
