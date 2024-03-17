@@ -51,6 +51,7 @@
                             <form method="post" action="{{route('cart.store')}}">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{$product->id}}">
+
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-12">
                                     <div class="form-group color-option">
