@@ -23,9 +23,8 @@ class StoreBorrowRequest extends FormRequest
     {
         return [
             'product_id' => 'required|integer',
-            'user_id' => 'required|integer',
             'from_date' => 'required|date',
-            'to_date' => 'required|date|after_or_equal:from_date',
-            'status' => 'required|in:active,inactive,pending'        ];
+            'to_date' => 'required|date|after_or_equal:from_date'
+        ];
     }
 }
