@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Borrow extends Model
 {
     use HasFactory;
+    protected $table ='borrow_request';
     protected $fillable =['product_id','user_id','from_date','to_date','status'];
 }
