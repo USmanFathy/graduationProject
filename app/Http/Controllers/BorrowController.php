@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBorrowRequest;
 use App\Models\Borrow;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class BorrowController extends Controller
@@ -14,15 +15,16 @@ class BorrowController extends Controller
     public function index()
     {
         $borrowing = Borrow::paginate(20);
-        return view('borrow.index',compact('borrowing'));
+        return view('front.borrow.index',compact('borrowing'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Product $product)
     {
-        return view('borrow.create');
+//        dd($product);
+        return view('front.borrow.create',compact('product'));
     }
 
     /**
@@ -30,8 +32,17 @@ class BorrowController extends Controller
      */
     public function store(StoreBorrowRequest $request, Borrow $borrow)
     {
-        $borrow->create($request->validated());
-        return redirect()->route('borrow.create');
+        $validatedData = $request->validated();
+        $validatedData['user_id'] = auth()->id();
+//        dd($validatedData);
+        try {
+
+            $borrow->create($validatedData);
+        } catch (\PDOException $exception){
+            dd($exception);
+        }
+//        dd($borrow);
+        return redirect()->route('borrowing.index');
     }
 
     /**
@@ -39,7 +50,7 @@ class BorrowController extends Controller
      */
     public function show(Borrow $borrow)
     {
-        return view('borrow.show', compact('borrow'));
+        return view('front.borrow.show', compact('borrow'));
     }
 
     /**
@@ -47,7 +58,7 @@ class BorrowController extends Controller
      */
     public function edit(Borrow $borrow)
     {
-        return view('borrow.edit', compact('borrow'));
+        return view('front.borrow.edit', compact('borrow'));
     }
 
     /**
@@ -56,7 +67,7 @@ class BorrowController extends Controller
     public function update(StoreBorrowRequest $request, Borrow $borrow)
     {
         $borrow->update($request->validated());
-        return redirect()->route('borrow.index');
+        return redirect()->route('borrowing.index');
     }
 
     /**
@@ -65,7 +76,7 @@ class BorrowController extends Controller
     public function destroy(Borrow $borrow)
     {
         $borrow->delete();
-        return redirect()->route('borrow.index');
+        return redirect()->route('borrowing.index');
 
     }
 }
