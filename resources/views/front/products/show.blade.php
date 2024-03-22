@@ -106,7 +106,7 @@
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-12">
                                         <div class="wish-button">
-                                            <button class="btn"><i class="fa-solid fa-handshake"></i>Borrow</button>
+                                            <a class="btn" href=" {{ route('borrowing.create',$product) }} "><i class="fa-solid fa-handshake"></i>Borrow</a>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-12">
