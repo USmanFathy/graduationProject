@@ -31,8 +31,7 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $product = new Product();
-        $tags = new Tag();
-        return view('Dashboard.products.create' , compact('product' , 'tags','categories' ));
+        return view('Dashboard.products.create' , compact('product' , 'categories' ));
 
     }
 
@@ -84,8 +83,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::all();
-        $tags = implode(',' ,$product->tags()->pluck('name')->toArray());
-        return view('Dashboard.products.edit' , compact('product' , 'tags','categories' ));
+        return view('Dashboard.products.edit' , compact('product' , 'categories' ));
 
     }
 

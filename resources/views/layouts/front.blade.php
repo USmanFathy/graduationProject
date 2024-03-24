@@ -190,7 +190,8 @@
                         <span class="cat-button"><i class="lni lni-menu"></i>All Categories</span>
                         <ul class="sub-category">
                             @php
-                                $categoriesWithSubcategories = getCategoriesWithSubcategories();
+                                $categoriesWithSubcategories = \App\Helpers\Categoray::getCategoriesWithSubcategories();
+
                             @endphp
 
                             @foreach ($categoriesWithSubcategories as $categoryGroup)

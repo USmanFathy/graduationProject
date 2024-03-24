@@ -18,6 +18,5 @@ class DatabaseSeeder extends Seeder
         \App\Models\Admin::factory(3)->create();
 
 
-
     }
 }

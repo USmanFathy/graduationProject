@@ -7,11 +7,7 @@
 @section('content')
 
 
-    <div class="mb-5">
-        <a href="{{route('admins.create')}}" class="btn btn-sm btn-outline-primary mr-2">Create</a>
-    </div>
-    <x-alert type="success"/>
-    <x-alert type="info"/>
+
     <x-alert type="danger"/>
 
     <form action="{{URL::current()}}" method="get" class="d-flex justify-content-between mb-4">
@@ -50,9 +46,7 @@
                 <td>{{$admin->phone_number}}</td>
                 <td>{{$admin->status}}</td>
                 <td>{{$admin->created_at}}</td>
-                <td>
-                    <a href="{{route('admins.edit' , $admin->id)}}" class="btn btn-sm btn-outline-success">Edit</a>
-                </td>
+
                 <td>
                     <form action="{{route('admins.destroy' , $admin->id)}}" method="post">
                         @csrf

@@ -49,11 +49,7 @@
     <x-form.input name="price" :value="$product->price" />
 </div>
 
-<div class="form-group">
-    <x-form.label for="name">Tags</x-form.label>
 
-    <x-form.input name="tags" :value="$tags"  />
-</div>
 <div class="form-group">
     <x-form.label for="status">Status</x-form.label>
 

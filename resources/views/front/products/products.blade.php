@@ -19,10 +19,13 @@
                         </div>
                         <!-- End Single Widget -->
                         <!-- Start Single Widget -->
+                        <?php
+                        $categoriesWithSubcategories = \App\Helpers\Categoray::getCategoriesWithSubcategories();
+                        ?>
                         <div class="single-widget">
                             <h3>All Categories</h3>
                             <ul class="list">
-                                @foreach(getCategoriesWithSubcategories() as $category)
+                                @foreach($categoriesWithSubcategories as $category)
                                 <li>
                                     <a href="{{route('front.products.index')}}?filter[category.slug]={{ $category->name }}">{{$category->name}}</a><span>({{$category['products']->count()}})</span>
                                 </li>
@@ -74,7 +77,7 @@
                                         <!-- Start Single Product -->
                                         <div class="single-product">
                                             <div class="product-image">
-                                                <img src="{{ $product->image ?? "https://via.placeholder.com/335x335" }}" alt="#">
+                                                <img src="{{ $product->image_url }}" alt="#">
                                                 <div class="button">
                                                     <a href="{{route('front.products.show',$product,$product->sulg)}}" class="btn"><i
                                                             class="lni lni-cart"></i> Add to Cart</a>
@@ -83,7 +86,7 @@
                                             <div class="product-info">
                                                 <span class="category">{{ $product['category']->name }}</span>
                                                 <h4 class="title">
-                                                    <a href="product-grids.html">{{$product->name}}</a>
+                                                    <p >{{$product->name}}</p>
                                                 </h4>
 
                                                 <div class="price">

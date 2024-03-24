@@ -11,7 +11,7 @@
                             @foreach($productSlider as $product)
                                 <!-- Start Single Slider -->
                                 <div class="single-slider"
-                                     style="background-image: url({{ $product->image }});">
+                                     style="background-image: {{ $product->image_url }};">
                                     <div class="content">
                                         <h2>
                                             {{ $product->name }}

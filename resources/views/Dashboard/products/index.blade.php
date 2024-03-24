@@ -33,7 +33,6 @@
             <th>Id</th>
             <th>Name</th>
             <th>Category</th>
-            <th>store</th>
             <th>Price</th>
             <th>status</th>
             <th>Created At</th>

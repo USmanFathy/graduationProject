@@ -1,10 +1,11 @@
 <?php
 
-
+namespace App\Helpers;
 
 use App\Models\Category;
-if (!function_exists('getCategoriesWithSubcategories')) {
-    function getCategoriesWithSubcategories()
+class Categoray
+{
+    public  static function getCategoriesWithSubcategories()
     {
         return  Category::with('subcategories')->with('products')->get();
     }
