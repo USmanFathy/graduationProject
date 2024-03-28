@@ -6,7 +6,7 @@
 @endsection
 @section('content')
 
-    <form action="{{route('categories.store')}}" method="post" enctype="multipart/form-data" >
+    <form action="{{route('categories.store')}}" method="POST" enctype="multipart/form-data" >
     @csrf
         @include('dashboard.categories.form', [
     'button_label' => 'Create'
