@@ -41,6 +41,8 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\LastActiveAt::class,
             \App\Http\Middleware\MarkNotificationAsRead::class,
+            \App\Http\Middleware\CorsMiddleWare::class
+
 
         ],
 
