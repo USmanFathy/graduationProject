@@ -31,7 +31,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 /////////////////////////////////////////////////////////////////////////////////////////
-    Route::middleware(['throttle:50,1'])->group(function () {
+    Route::middleware(['throttle:50,1','cors'])->group(function () {
         Route::get('/products', [ProductController::class, 'index'])
             ->name('front.products.index');
         Route::get('/products/{product:slug}', [ProductController::class, 'show'])
@@ -42,13 +42,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
 /////////////////////////////////////////////////////////////////////////////////////////
     Route::resource('cart', CartController::class);
 ////////////////////////////////////////////////////////////////////////////////////////
-    Route::get('/checkout', [CheckOutController::class, 'create'])->name('checkout.index');
-    Route::post('/checkout/store', [CheckOutController::class, 'store'])->name('checkout.store');
+    Route::get('/checkout', [CheckOutController::class, 'create'])->name('checkout.index')->middleware(['auth','cors']);
+    Route::post('/checkout/store', [CheckOutController::class, 'store'])->name('checkout.store')->middleware(['auth','cors']);
 ////////////////////////////////////////////////////////////////////////////////////////////////
 ///
 });
 /// Borrowing routes
-Route::resource('borrowing', BorrowController::class)->except('create')->middleware('auth');
+Route::resource('borrowing', BorrowController::class)->except('create')->middleware(['auth','cors']);
 Route::get('borrowing/create/{product}', [BorrowController::class, 'create'])->name('borrowing.create');
 
 

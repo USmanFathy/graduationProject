@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\CheckApiToken;
 use App\Http\Middleware\CheckUserType;
+use App\Http\Middleware\CorsMiddleWare;
 use App\Http\Middleware\LastActiveAt;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -74,6 +75,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'user-check' => CheckUserType::class,
+        'cors' =>CorsMiddleWare::class,
         'localize'                => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
         'localizationRedirect'    => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
         'localeSessionRedirect'   => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,

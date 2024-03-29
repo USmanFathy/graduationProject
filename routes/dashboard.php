@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group([
-    'middleware'=> ['auth:admin'],
+    'middleware'=> ['auth:admin','cors'],
     'prefix'    => 'admin/dashboard'
 ] , function (){
     Route::get('/' , [DashboardConroller::class , 'index'])->name('dashboard');
