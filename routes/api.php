@@ -20,6 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::apiResource('products' , ProductsController::class);
-Route::post('auth/access-token' , [\App\Http\Controllers\Api\AccessTokenController::class , 'store'])->middleware('guest:sanctum');
-Route::delete('auth/access-token/{token?}' , [\App\Http\Controllers\Api\AccessTokenController::class , 'destroy'])->middleware('auth:sanctum');
+////Route::apiResource('products' , ProductsController::class);
+//Route::post('auth/access-token' , [\App\Http\Controllers\Api\AccessTokenController::class , 'store'])->middleware('guest:sanctum');
+//Route::delete('auth/access-token/{token?}' , [\App\Http\Controllers\Api\AccessTokenController::class , 'destroy'])->middleware('auth:sanctum');
