@@ -9,7 +9,7 @@
     <form action="{{route('categories.update' , $category->id)}}" method="post" enctype="multipart/form-data">
     @csrf
      @method('put')
-    @include('dashboard.categories.form' , [
+    @include('Dashboard.categories.form' , [
     'button_label' => 'Update'
 ])
 </form>

@@ -8,7 +8,7 @@
 
     <form action="{{route('categories.store')}}" method="POST" enctype="multipart/form-data" >
     @csrf
-        @include('dashboard.categories.form', [
+        @include('Dashboard.categories.form', [
     'button_label' => 'Create'
 ])
 </form>
