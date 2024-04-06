@@ -34,7 +34,15 @@ class HomeController extends Controller
                 'categories' => $categories
             ]
         );
+
+
     }
+
+    public function search($q)
+    {
+        $result = Product::with('category')->where('name', '=', $q)->orWhere('author', '=', $q)->orWhere('category.name', '=', $q)->get();
+    }
+
 
 
 
