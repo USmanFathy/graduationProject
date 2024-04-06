@@ -13,15 +13,30 @@ class ProductController extends Controller
 {
     public function index()
     {
+
         $products = QueryBuilder::for(Product::class)
             ->with('category')
-            ->allowedFilters(['category.slug','name','price'])
+            ->allowedFilters(['category.slug','name','price','author']) // Add 'q' as a custom filter if needed
             ->allowedSorts(['name', 'price'])
-
             ->paginate(12);
-        return view('front.products.products',compact('products'));
 
+        return view('front.products.products', compact('products'));
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->q;
+        $products = Product::with('category')
+            ->where('name', 'LIKE', "%{$query}%")
+            ->orWhere('author', 'LIKE', "%{$query}%")
+            ->orWhereHas('category', function($q) use ($query) {
+                $q->where('slug', 'LIKE', "%{$query}%");
+            })
+            ->paginate(12);
+        return view('front.products.products', compact('products'));
+    }
+
+
 
     public function show(Product $product)
     {
