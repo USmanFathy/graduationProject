@@ -34,6 +34,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
     Route::middleware(['throttle:50,1','cors'])->group(function () {
         Route::get('/products', [ProductController::class, 'index'])
             ->name('front.products.index');
+        Route::get('/products/search', [ProductController::class, 'search'])->name('front.products.search');
         Route::get('/products/{product:slug}', [ProductController::class, 'show'])
             ->name('front.products.show');
         Route::get('/products/{category:slug}/filter', [ProductController::class, 'productsFilters'])
