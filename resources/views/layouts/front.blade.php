@@ -135,25 +135,14 @@
                     <div class="main-menu-search">
                         <!-- navbar search start -->
                         <div class="navbar-search search-style-5">
-                            <div class="search-select">
-                                <div class="select-position">
-                                    <select id="select1">
-                                        <option selected>All</option>
-                                        <option value="1">option 01</option>
-                                        <option value="2">option 02</option>
-                                        <option value="3">option 03</option>
-                                        <option value="4">option 04</option>
-                                        <option value="5">option 05</option>
-                                    </select>
-                                </div>
-                            </div>
                             <div class="search-input">
-                                <input type="text" placeholder="Search">
+                                <input type="text" name="q" id="q" placeholder="Search">
                             </div>
                             <div class="search-btn">
-                                <button><i class="lni lni-search-alt"></i></button>
+                                <button onclick="searchAndRedirect()"><i class="lni lni-search-alt"></i></button>
                             </div>
                         </div>
+
                         <!-- navbar search Ends -->
                     </div>
                     <!-- End Main Menu Search -->
@@ -431,6 +420,28 @@
 <script src="{{asset('assets/js/tiny-slider.js')}}"></script>
 <script src="{{asset('assets/js/glightbox.min.js')}}"></script>
 <script src="{{asset('assets/js/main.js')}}"></script>
+<script>
+    document.querySelector('.search-btn button').addEventListener('click', searchAndRedirect);
+    function searchAndRedirect(event) {
+        event.preventDefault();
+        var query = document.getElementById('q').value; // Get the value from the input
+        $.ajax({
+            url: '{{route('front.products.search')}}', // Your Laravel route that handles the search
+            type: 'GET',
+            data: { q: query }, // Pass the query parameter
+            success: function(response) {
+                // Redirect to the desired route on success
+                window.location.href = '{{route('front.products.search')}}?q=' + encodeURIComponent(query);
+            },
+            error: function(xhr, status, error) {
+                // Handle errors here
+                console.error(error);
+            }
+        });
+    }
+
+</script>
+
 @stack('js')
 </body>
 
