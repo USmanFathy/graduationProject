@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BorrowController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\Front\Auth\TwoFactorAuthController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\front\CheckOutController;
@@ -52,9 +53,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
 Route::resource('borrowing', BorrowController::class)->except('create')->middleware(['auth','cors']);
 Route::get('borrowing/create/{product}', [BorrowController::class, 'create'])->name('borrowing.create');
 
+Route::get('contactus', [ContactUsController::class,'index'])->name('contactus');
+Route::post('contactus', [ContactUsController::class,'send'])->name('contactus');
 
 require __DIR__.'/dashboard.php';
-//require __DIR__.'/auth.php';
+require __DIR__.'/auth.php';
 
 
 
