@@ -28,13 +28,13 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 //    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 //    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 //});
+Route::get('/products/search', [ProductController::class, 'search'])->name('front.products.search');
 Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 /////////////////////////////////////////////////////////////////////////////////////////
     Route::middleware(['throttle:50,1','cors'])->group(function () {
         Route::get('/products', [ProductController::class, 'index'])
             ->name('front.products.index');
-        Route::get('/products/search', [ProductController::class, 'search'])->name('front.products.search');
         Route::get('/products/{product:slug}', [ProductController::class, 'show'])
             ->name('front.products.show');
         Route::get('/products/{category:slug}/filter', [ProductController::class, 'productsFilters'])

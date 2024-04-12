@@ -29,6 +29,20 @@ return [
         'title' => 'Admin',
         'badge' => 'New',
         'active' => 'admins.*',
+    ]
+    ,[
+        'icon'  => 'fas fa-box nav-icon',
+        'route' => 'orders.index',
+        'title' => 'Order',
+        'badge' => 'New',
+        'active' => 'admins.*',
+    ]
+    ,[
+        'icon'  => 'fas fa-box nav-icon',
+        'route' => 'borrows.index',
+        'title' => 'Borrow Requests',
+        'badge' => 'New',
+        'active' => 'admins.*',
     ],
 
 ];
