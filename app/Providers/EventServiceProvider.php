@@ -2,9 +2,17 @@
 
 namespace App\Providers;
 
+use App\Events\ApproveBorrowRequest;
+use App\Events\DownloadPdfAfterPaymentSuccess;
 use App\Events\OrderCreated;
+use App\Events\PaymentSuccess;
+use App\Events\RejectBorrowRequest;
+use App\Listeners\ApproveBorrowRequestListener;
 use App\Listeners\DeductProductQuatity;
+use App\Listeners\DownloadPdfAfterPaymentSuccessListener;
 use App\Listeners\EmptyCart;
+use App\Listeners\PaymentSuccessListener;
+use App\Listeners\RejectBorrowRequestListener;
 use App\Listeners\SendOrderCreatedNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -27,6 +35,18 @@ class EventServiceProvider extends ServiceProvider
             DeductProductQuatity::class,
             EmptyCart::class,
         ],
+        ApproveBorrowRequest::class=>[
+            ApproveBorrowRequestListener::class
+        ],
+        RejectBorrowRequest::class=>[
+            RejectBorrowRequestListener::class
+        ],
+        DownloadPdfAfterPaymentSuccess::class=>[
+            DownloadPdfAfterPaymentSuccessListener::class
+        ],
+        PaymentSuccess::class=>[
+            PaymentSuccessListener::class
+        ]
     ];
 
     /**

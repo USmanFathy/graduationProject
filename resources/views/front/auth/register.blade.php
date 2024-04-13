@@ -27,7 +27,8 @@
                             <h3>No Account? Register</h3>
                             <p>Registration takes less than a minute but gives you full control over your orders.</p>
                         </div>
-                        <form class="row" method="post" action="{{route('register')}}">
+                        <form class="row" method="POST" action="{{route('register')}}">
+                            @csrf
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="reg-fn">UserName</label>
@@ -56,7 +57,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="reg-pass-confirm">Confirm Password</label>
-                                    <input class="form-control" type="password" id="reg-pass-confirm" name="password" required>
+                                    <input class="form-control" type="password" id="reg-pass-confirm" name="password_confirmation" required>
                                 </div>
                             </div>
                             <div class="button">

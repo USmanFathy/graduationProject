@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Dashboard\AdminController;
+use App\Http\Controllers\Dashboard\BorrowDashboardController;
 use App\Http\Controllers\Dashboard\CategoriesController;
 use App\Http\Controllers\Dashboard\DashboardConroller;
+use App\Http\Controllers\Dashboard\OrdersDashboardController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\RoleController;
@@ -30,6 +32,10 @@ Route::group([
     Route::get('/profile' ,[ProfileController::class ,'edit'])->name('dashboard.profile.edit');
     Route::patch('/profile' ,[ProfileController::class ,'update'])->name('dashboard.profile.update');
 
+    Route::resource('orders' , OrdersDashboardController::class);
+    Route::post('borrows/approve/{borrow}',[BorrowDashboardController::class,'approve'])->name('borrows.approve');
+    Route::post('borrows/reject/{borrow}',[BorrowDashboardController::class,'reject'])->name('borrows.reject');
+    Route::resource('borrows' , BorrowDashboardController::class);
 
     Route::resource('/roles', RoleController::class);
     Route::resource('/admins', AdminController::class);
