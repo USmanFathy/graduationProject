@@ -2,9 +2,13 @@
 
 namespace App\Providers;
 
+use App\Events\ApproveBorrowRequest;
 use App\Events\OrderCreated;
+use App\Events\RejectBorrowRequest;
+use App\Listeners\ApproveBorrowRequestListener;
 use App\Listeners\DeductProductQuatity;
 use App\Listeners\EmptyCart;
+use App\Listeners\RejectBorrowRequestListener;
 use App\Listeners\SendOrderCreatedNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -26,6 +30,12 @@ class EventServiceProvider extends ServiceProvider
             SendOrderCreatedNotification::class,
             DeductProductQuatity::class,
             EmptyCart::class,
+        ],
+        ApproveBorrowRequest::class=>[
+            ApproveBorrowRequestListener::class
+        ],
+        RejectBorrowRequest::class=>[
+            RejectBorrowRequestListener::class
         ],
     ];
 
