@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\front;
 
+use App\Events\DownloadPdfAfterPaymentSuccess;
 use App\Events\OrderCreated;
+use App\Events\PaymentSuccess;
 use App\Exceptions\CartEmptyException;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
@@ -42,23 +44,35 @@ class CheckOutController extends Controller
         DB::beginTransaction();
         try {
 
+            $order = Order::create([
+                'user_id' => auth()->id(),
+                'payment_method' =>'cod',
+            ]);
 
             foreach ($order_author as $store_id => $product){
-                $order = Order::create([
-                    'user_id' => auth()->id(),
-                    'payment_method' =>'cod',
-                ]);
 
 
 
             foreach ($product as $item){
-                OrderItem::create([
+                $orderItem =OrderItem::create([
                     'order_id' => $order->id,
                     'product_id' => $item->product_id,
                     'product_name' => $item->product->name,
                     'quantity' => $item->quantity,
                     'price' => $item->product->price
                 ]);
+//                TODO: make payment here by varaiable $payment and check if success and book is pdf send email if not pdf send the book is paid and admin well contact with you
+                $firstIteration = true;
+                if ($payment){
+                    $user =auth()->user();
+                    if ($item->product->type == 'pdf'){
+                        $product = $item->product;
+                        event(new DownloadPdfAfterPaymentSuccess($user ,$product));
+                    }
+                    else if ($firstIteration){
+                        event(new PaymentSuccess($user));
+                    }
+                }
             }
 
             foreach ($request->post('address')as $type =>$address)
