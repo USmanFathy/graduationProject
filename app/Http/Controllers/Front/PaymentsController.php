@@ -22,7 +22,6 @@ class PaymentsController extends Controller
         dd($total);
     }
 
-    use Stripe\StripeClient;
 
     public function createStripePaymentIntent(Order $order)
     {
@@ -42,7 +41,7 @@ class PaymentsController extends Controller
                                                              ]);
 
             return [
-                'client_secret' => $paymentIntent->client_secret
+                'clientSecret' => $paymentIntent->client_secret
             ];
         } catch (\Stripe\Exception\ApiErrorException $e) {
             // Handle exception
