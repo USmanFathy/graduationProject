@@ -16,7 +16,8 @@
             <th>Id</th>
             <th>User Name</th>
             <th>Total</th>
-            <th>Product </th>
+            <th>Payment Status </th>
+            <th>Book </th>
             <th>address </th>
 
         </tr>
@@ -28,8 +29,29 @@
                 <td>{{$order->id}}</td>
                 <td>{{$order->user->name}}</td>
                 <td>{{$order->total}}</td>
+
                 <td>
-                    <a href="#" class="view-products" data-toggle="modal" data-target="#orderModal{{$order->id}}">View Products</a>
+                    @php
+                        $badgeClass = '';
+                        switch ($order->payment_status) {
+                            case 'pending':
+                                $badgeClass = 'badge-warning';
+                                break;
+                            case 'cancelled':
+                            case 'failed':
+                                $badgeClass = 'badge-danger';
+                                break;
+                            case 'paid':
+                                $badgeClass = 'badge-success';
+                                break;
+                            default:
+                                $badgeClass = 'badge-secondary';
+                        }
+                    @endphp
+                    <span class="badge {{$badgeClass}}" style="font-size: 14px;">{{$order->payment_status}}</span>
+                </td>
+                <td>
+                    <a href="#" class="view-products" data-toggle="modal" data-target="#orderModal{{$order->id}}">View Books</a>
 
                 </td>
                 <td><a href="#" class="view-address" data-toggle="modal" data-target="#orderModalAddress{{$order->id}}">View Address</a></td>
@@ -39,7 +61,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="orderModalLabel{{$order->id}}">Order {{$order->id}} Products</h5>
+                            <h5 class="modal-title" id="orderModalLabel{{$order->id}}">Order {{$order->id}} Books</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -48,8 +70,8 @@
                             <ul>
                                 @foreach($order->items as $product)
                                     <li>
-                                        <span style="font-weight: bold;">Product Name:</span> {{$product->name}} ||
-                                        <span style="font-weight: bold;">Product Price:</span> {{$product->price}} ||
+                                        <span style="font-weight: bold;">Book Name:</span> {{$product->name}} ||
+                                        <span style="font-weight: bold;">Book Price:</span> {{$product->price}} ||
                                         <span style="font-weight: bold;">Quantity:</span> {{$product->quantity}}
                                     </li>
                                 @endforeach
@@ -67,7 +89,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="orderModalLabel{{$order->id}}">Order {{$order->id}} Products</h5>
+                            <h5 class="modal-title" id="orderModalLabel{{$order->id}}">Order {{$order->id}} Address</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

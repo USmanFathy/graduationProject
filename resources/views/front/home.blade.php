@@ -2,6 +2,8 @@
 
 
     <x-alert type="info"/>
+    <x-alert type="success"/>
+    <x-alert type="danger"/>
     <section class="hero-area">
         <div class="container">
             <div class="row">

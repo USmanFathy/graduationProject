@@ -57,6 +57,8 @@ class PaymentsController extends Controller
         $stripe = new StripeClient(env('STRIPE_SECRET'));
         $paymentIntent =$stripe->paymentIntents->retrieve($request->query('payment_intent'), []);
         if($paymentIntent->status == 'succeeded'){
+            $order->payment_status='paid';
+            $order->save();
             $firstIteration = true;
             $user =auth()->user();
             $items = $order->items();
@@ -81,8 +83,11 @@ class PaymentsController extends Controller
                 'transaction_data'=> json_encode($paymentIntent),
 
                                 ])->save();
+            return redirect()->route('home')->with('success','Payment Successfully');
 
         }
-        return Payment::all();
+        $order->payment_status='failed';
+        $order->save();
+        return redirect()->route('home')->with('danger','Payment Failed');
     }
 }
