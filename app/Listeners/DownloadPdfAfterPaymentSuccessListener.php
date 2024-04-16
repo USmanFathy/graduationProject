@@ -22,7 +22,7 @@ class DownloadPdfAfterPaymentSuccessListener
      */
     public function handle(DownloadPdfAfterPaymentSuccess $event): void
     {
-        $user = $event->user;
+        $user = $event->user->first();
         $product = $event->product;
         $user->notify(new DownloadPdfAfterPaymentSuccessMessage($product));
     }

@@ -14,8 +14,8 @@
         <thead>
         <tr>
             <th>Id</th>
-            <th>Product Name</th>
-            <th>User NAme</th>
+            <th>Book Name</th>
+            <th>User Name</th>
             <th>Start Date </th>
             <th>To Date</th>
             <th>status</th>

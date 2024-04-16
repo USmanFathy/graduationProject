@@ -31,7 +31,7 @@ class BorrowDashboardController extends Controller
 
             }
         }catch (\Exception $e) {
-            throw new \Exception($e->getMessage);
+            throw new \Exception($e->getMessage());
         }
     }
     public function reject(Borrow $borrow)
@@ -44,7 +44,7 @@ class BorrowDashboardController extends Controller
 
             }
         }catch (\Exception $e) {
-            throw new \Exception($e->getMessage);
+            throw new \Exception($e->getMessage());
         }
     }
     public function destroy(Borrow $borrow)

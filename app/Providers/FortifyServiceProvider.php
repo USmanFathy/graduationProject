@@ -75,6 +75,7 @@ class FortifyServiceProvider extends ServiceProvider
         if (Config::get('fortify.guard' ) == 'web') {
             Fortify::viewPrefix('front.auth.');
             Fortify::registerView('front.auth.register');
+            Fortify::redirects('front.home');
 
         }else{
             Fortify::viewPrefix('auth.');

@@ -22,7 +22,7 @@ class PaymentSuccessListener
      */
     public function handle(PaymentSuccess $event): void
     {
-        $user = $event->user;
+        $user = $event->user->first();
         $user->notify(new PaymentSuccessMessage());
     }
 }

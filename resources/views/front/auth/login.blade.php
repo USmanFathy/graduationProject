@@ -1,23 +1,25 @@
-<x-front-layout title="Login">
-    <x-slot:breadcrumb>
-        <div class="breadcrumbs">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="breadcrumbs-content">
-                            <h1 class="page-title">Login</h1>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <ul class="breadcrumb-nav">
-                            <li><a href="{{route('home')}}"><i class="lni lni-home"></i> Home</a></li>
-                            <li>Login</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </x-slot:breadcrumb>
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Login</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/favicon.svg')}}" />
+
+    <!-- ========================= CSS here ========================= -->
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/css/LineIcons.3.0.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/css/tiny-slider.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/css/glightbox.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/css/main.css')}}" />
+    @stack('css')
+
+</head>
+
+<body>
     <div class="account-login section">
         <div class="container">
             <div class="row">
@@ -60,5 +62,33 @@
             </div>
         </div>
     </div>
+    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/js/tiny-slider.js')}}"></script>
+    <script src="{{asset('assets/js/glightbox.min.js')}}"></script>
+    <script src="{{asset('assets/js/main.js')}}"></script>
+    <script>
+        document.querySelector('.search-btn button').addEventListener('click', searchAndRedirect);
+        function searchAndRedirect(event) {
+            event.preventDefault();
+            var query = document.getElementById('q').value; // Get the value from the input
+            $.ajax({
+                url: '{{route('front.products.search')}}', // Your Laravel route that handles the search
+                type: 'GET',
+                data: { q: query }, // Pass the query parameter
+                success: function(response) {
+                    // Redirect to the desired route on success
+                    window.location.href = '{{route('front.products.search')}}?q=' + encodeURIComponent(query);
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors here
+                    console.error(error);
+                }
+            });
+        }
 
-</x-front-layout>
+    </script>
+
+    @stack('js')
+</body>
+
+</html>

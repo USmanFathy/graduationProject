@@ -22,7 +22,7 @@ class RejectBorrowRequestListener
      */
     public function handle(RejectBorrowRequest $event): void
     {
-        $user = $event->user;
+        $user = $event->user->first();
         $user->notify(new RejectBorrowRequestMessage());
     }
 }
