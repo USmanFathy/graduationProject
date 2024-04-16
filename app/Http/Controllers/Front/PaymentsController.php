@@ -63,7 +63,7 @@ class PaymentsController extends Controller
                 'method' => 'stripe',
                 'status'  => 'completed',
                 'transaction_id' => $paymentIntent->id,
-                'transaction_data'=> json_decode($paymentIntent),
+                'transaction_data'=> json_encode($paymentIntent),
 
                                 ])->save();
 
