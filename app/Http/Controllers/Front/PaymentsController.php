@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Stripe\StripeClient;
@@ -51,6 +52,22 @@ class PaymentsController extends Controller
 
     public function confirm(Request $request, Order $order)
     {
-        dd($request->all());
+        $stripe = new StripeClient(env('STRIPE_SECRET'));
+        $paymentIntent =$stripe->paymentIntents->retrieve($request->query('payment_intent'), []);
+        if($paymentIntent->status == 'succeeded'){
+            $payment = new Payment();
+            $payment->forceFill([
+                'order_id' => $order->id,
+                'amount'=>$paymentIntent->amount,
+                'currency' => $paymentIntent->currency,
+                'method' => 'stripe',
+                'status'  => 'completed',
+                'transaction_id' => $paymentIntent->id,
+                'transaction_data'=> json_decode($paymentIntent),
+
+                                ])->save();
+
+        }
+        return Payment::all();
     }
 }
