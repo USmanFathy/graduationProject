@@ -63,16 +63,16 @@ class CheckOutController extends Controller
                 ]);
 //                TODO: make payment here by varaiable $payment and check if success and book is pdf send email if not pdf send the book is paid and admin well contact with you
                 $firstIteration = true;
-                if ($payment){
-                    $user =auth()->user();
-                    if ($item->product->type == 'pdf'){
-                        $product = $item->product;
-                        event(new DownloadPdfAfterPaymentSuccess($user ,$product));
-                    }
-                    else if ($firstIteration){
-                        event(new PaymentSuccess($user));
-                    }
-                }
+//                if ($payment){
+//                    $user =auth()->user();
+//                    if ($item->product->type == 'pdf'){
+//                        $product = $item->product;
+//                        event(new DownloadPdfAfterPaymentSuccess($user ,$product));
+//                    }
+//                    else if ($firstIteration){
+//                        event(new PaymentSuccess($user));
+//                    }
+//                }
             }
 
             foreach ($request->post('address')as $type =>$address)
@@ -83,12 +83,12 @@ class CheckOutController extends Controller
             }
 
             DB::commit();
-            event(new  OrderCreated($order));
+//            event(new  OrderCreated($order));
         }catch (Throwable $e){
             DB::rollBack();
             throw $e;
         }
 
-        return redirect()->route('home');
+        return to_route('order.payments.index',$order->id);
     }
 }
