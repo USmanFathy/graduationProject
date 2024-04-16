@@ -1,24 +1,24 @@
 <x-front-layout title="payment">
     <x-slot:breadcrumb>
-        <div class="breadcrumbs">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-6 col-12">
                         <div id="payment-message" style="display: none" class="alert alert-info"></div>
-                        <form id="payment-form" action="" method="post">
-                            @csrf <!-- CSRF token for security -->
+                        <form id="payment-form">
                             <div id="payment-element">
-                                <!-- Stripe Elements will be inserted here -->
+                            <!-- Stripe Elements will be inserted here -->
                             </div>
-                            <button type="submit" class="btn">
+                            <button id="submit" class="btn btn-primary">
+                                <div><span id="spinner" style="display: none">Processing...</span></div>
                                 <span id="btn-text">Pay Now</span>
-                                <span id="spinner" style="display: none">Processing...</span>
                             </button>
+
+
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
+
     </x-slot:breadcrumb>
     <script src="https://js.stripe.com/v3/"></script>
     <script type="text/javascript">
@@ -128,11 +128,11 @@
                 // Disable the button and show a spinner
                 document.querySelector("#submit").disabled = true;
                 document.querySelector("#spinner").style.display = "inline";
-                document.querySelector("#button-text").style.display = "none";
+                document.querySelector("#btn-text").style.display = "none";
             } else {
                 document.querySelector("#submit").disabled = false;
                 document.querySelector("#spinner").style.display = "none";
-                document.querySelector("#button-text").style.display = "inline";
+                document.querySelector("#btn-text").style.display = "inline";
             }
         }
     </script>
