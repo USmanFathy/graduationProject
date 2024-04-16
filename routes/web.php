@@ -63,7 +63,7 @@ Route::post('contactus', [ContactUsController::class,'send'])->name('contactus')
 Route::get('order/{order}/payments', [PaymentsController::class, 'index'])->name('order.payments.index');
 Route::post('order/{order}/stripe/paymentIntent/create', [PaymentsController::class, 'createStripePaymentIntent'])
     ->name('stripe.paymentsIntent.create');
-Route::post('order/{order}/pay/stripe/callback', [PaymentsController::class, 'confirm'])
+Route::get('order/{order}/pay/stripe/callback', [PaymentsController::class, 'confirm'])
     ->name('stripe.return');
 
 Route::get('order/{order}/test', [PaymentsController::class, 'test'])->name('order.payments.test');
