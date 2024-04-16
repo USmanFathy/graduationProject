@@ -36,6 +36,7 @@
             <th>Price</th>
             <th>status</th>
             <th>Created At</th>
+            <th></th>
             <th colspan="2"></th>
 
         </tr>
@@ -51,6 +52,28 @@
                 <td>{{Currency::format($product->price)}}</td>
                 <td>{{$product->status}}</td>
                 <td>{{$product->created_at}}</td>
+                @if($product->featured == 0)
+                    <td>
+                        <form action="{{route('products.feature' , $product->id)}}" method="post">
+                            @csrf
+                            {{--  form method spoofing--}}
+                            <button class="btn btn-sm btn-outline-success">Feature</button>
+
+
+                        </form>
+                    </td>
+                @else
+                    <td>
+                        <form action="{{route('products.disable-feature' , $product->id)}}" method="post">
+                            @csrf
+                            {{--  form method spoofing--}}
+                            <button class="btn btn-sm btn-outline-danger">Disable Feature</button>
+
+
+                        </form>
+                    </td>
+                @endif
+
                 <td>
                     <a href="{{route('products.edit' , $product->id)}}" class="btn btn-sm btn-outline-success">Edit</a>
                 </td>

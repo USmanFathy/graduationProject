@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Events\DownloadPdfAfterPaymentSuccess;
+use App\Events\PaymentSuccess;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Payment;
@@ -55,6 +57,19 @@ class PaymentsController extends Controller
         $stripe = new StripeClient(env('STRIPE_SECRET'));
         $paymentIntent =$stripe->paymentIntents->retrieve($request->query('payment_intent'), []);
         if($paymentIntent->status == 'succeeded'){
+            $firstIteration = true;
+            $user =auth()->user();
+            $items = $order->items();
+            foreach ($items as $item){
+                if ($item->product->type == 'pdf'){
+                    $product = $item->product;
+                    event(new DownloadPdfAfterPaymentSuccess($user ,$product));
+                }
+                else if ($firstIteration){
+                    event(new PaymentSuccess($user));
+                    $firstIteration = false;
+                }
+                }
             $payment = new Payment();
             $payment->forceFill([
                 'order_id' => $order->id,

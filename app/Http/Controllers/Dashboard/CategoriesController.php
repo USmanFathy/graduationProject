@@ -204,7 +204,20 @@ class CategoriesController extends Controller
             ->with('danger' , 'category deleted forever!');
     }
 
-
+        public function enableFeature(Category $category)
+        {
+            $category->featured =1;
+            $category->save();
+            return redirect()->route('categories.index')
+                ->with('success' , 'category Enabled Featured!');
+        }
+        public function disableFeature(Category $category)
+        {
+            $category->featured =0;
+            $category->save();
+            return redirect()->route('categories.index')
+                ->with('danger' , 'category Disabled Featured!');
+        }
 
 
 }

@@ -215,7 +215,7 @@
                                     <a href="{{route('home')}}" aria-label="Toggle navigation">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="contact.html" aria-label="Toggle navigation">Contact Us</a>
+                                    <a href="{{route('contactus')}}" aria-label="Toggle navigation">Contact Us</a>
                                 </li>
                             </ul>
                         </div> <!-- navbar collapse -->
@@ -296,17 +296,6 @@
                             <p>Designed and Developed by<a href="https://graygrids.com/" rel="nofollow"
                                                            target="_blank">GrayGrids</a></p>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-12">
-                        <ul class="socila">
-                            <li>
-                                <span>Follow Us On:</span>
-                            </li>
-                            <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
-                            <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
-                            <li><a href="javascript:void(0)"><i class="lni lni-instagram"></i></a></li>
-                            <li><a href="javascript:void(0)"><i class="lni lni-google"></i></a></li>
-                        </ul>
                     </div>
                 </div>
             </div>

@@ -42,9 +42,8 @@ class ProductController extends Controller
     {
         $request->validate([
             'name'      =>'required|string|min:3|max:255',
-
             'image'    =>[
-                'image',
+                'image','max:1048576','dimensions:min_width=150 , min_height=100'
             ],
             'status' => 'in:active,archived,draft',
             'attachment' => 'required_if:type,==,pdf'
@@ -65,7 +64,7 @@ class ProductController extends Controller
         }
          Product::create($data);
 
-        return redirect()->route('products.index')->with('success' , 'Product Created!');
+        return redirect()->route('products.index')->with('success' , 'Book Created!');
 
     }
 
@@ -98,7 +97,9 @@ class ProductController extends Controller
             'image'    =>[
                 'image','max:1048576','dimensions:min_width=150 , min_height=100'
             ],
-            'status' => 'in:active,archived,draft'
+            'status' => 'in:active,archived,draft',
+            'attachment' => 'required_if:type,==,pdf'
+
         ]);
         $old_image = $product->image;
         $old_attachment = $product->attachment;
@@ -125,7 +126,7 @@ class ProductController extends Controller
             Storage::disk('public')->delete($old_image);
         }
 
-        return redirect()->route('products.index')->with('info' ,'Product Updated');
+        return redirect()->route('products.index')->with('info' ,'Book Updated');
     }
 
     /**
@@ -135,7 +136,7 @@ class ProductController extends Controller
     {
         $product->delete();
 
-        return redirect()->route('products.index')->with('danger' ,'Product Deleted!');
+        return redirect()->route('products.index')->with('danger' ,'Book Deleted!');
 
     }
     protected function uploadImage(Request $request)
@@ -170,7 +171,7 @@ class ProductController extends Controller
         $product= Product::onlyTrashed()->findOrFail($id);
         $product->restore($id);
         return redirect()->route('products.trash')
-            ->with('success' , 'Product restored!');
+            ->with('success' , 'Book restored!');
     }
 
     public function force_delete($id)
@@ -181,7 +182,21 @@ class ProductController extends Controller
             Storage::disk('public')->deleteDirectory('Products/'.$product->name);        }
 
         return redirect()->route('products.trash')
-            ->with('danger' , 'Product deleted forever!');
+            ->with('danger' , 'Book deleted forever!');
+    }
+    public function enableFeature(Product $product)
+    {
+        $product->featured =1;
+        $product->save();
+        return redirect()->route('products.index')
+            ->with('success' , 'Book Enabled Featured!');
+    }
+    public function disableFeature(Product $product)
+    {
+        $product->featured =0;
+        $product->save();
+        return redirect()->route('products.index')
+            ->with('danger' , 'Book Disabled Featured!');
     }
 
 

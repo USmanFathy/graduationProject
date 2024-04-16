@@ -1,5 +1,6 @@
 <x-front-layout title="Home">
 
+
     <x-alert type="info"/>
     <section class="hero-area">
         <div class="container">
@@ -10,8 +11,9 @@
                         <div class="hero-slider">
                             @foreach($productSlider as $product)
                                 <!-- Start Single Slider -->
+
                                 <div class="single-slider"
-                                     style="background-image: {{ $product->image_url }};">
+                                     style="background-image: url('{{ $product->image_url }}');">
                                     <div class="content">
                                         <h2>
                                             {{ $product->name }}
@@ -32,6 +34,32 @@
                 </div>
             </div>
         </div>
+        <section class="trending-product section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-title">
+                            <h2>Trending Product</h2>
+                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have
+                                suffered alteration in some form.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    @foreach($products as $product)
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <!-- Start Single Product -->
+
+                            <x-product_cart :product="$product"/>
+
+                        </div>
+                    @endforeach
+                    <!-- End Single Product -->
+
+
+                </div>
+            </div>
+        </section>
     </section>
 
     <!-- Start Featured Categories Area -->
@@ -50,15 +78,15 @@
                     <div class="col-lg-4 col-md-6 col-12">
                         <!-- Start Single Category -->
                         <div class="single-category">
-                            <h3 class="heading"> <a href="{{ route('products_filter',$category,$category->slug) }}" >{{ $category->name }}</a></h3>
+                            <h3 class="heading"> <a href="{{route('front.products.index')}}?filter[category.slug]={{ $category->name }}" >{{ $category->name }}</a></h3>
                             <ul>
                                 @foreach ($category['subcategories'] as $subcategory)
 
-                                    <li><a href="{{ route('products_filter',$subcategory,$subcategory->slug) }}" >{{ $subcategory->name }}</a></li>
+                                    <li><a href="{{route('front.products.index')}}?filter[category.slug]={{ $subcategory->name }}" >{{ $subcategory->name }}</a></li>
                                 @endforeach
                             </ul>
                             <div class="images">
-                                <img src="{{$category->image}}" width="150px" height="150px" alt="#">
+                                <img src="{{asset('/storage/'.$category->image)}}" width="150px" height="150px" alt="#">
                             </div>
                         </div>
                         <!-- End Single Category -->

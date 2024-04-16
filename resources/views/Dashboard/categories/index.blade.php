@@ -34,6 +34,7 @@
             <th>Books</th>
             <th>Status</th>
             <th>Created At</th>
+            <th ></th>
             <th colspan="2"></th>
 
         </tr>
@@ -49,13 +50,35 @@
                 <td>{{$category->products_count}}</td>
                 <td>{{$category->status}}</td>
                 <td>{{$category->created_at}}</td>
+                @if($category->featured == 0)
+                    <td>
+                        <form action="{{route('categories.feature' , $category->id)}}" method="post">
+                            @csrf
+                            {{--  form method spoofing--}}
+                            <button class="btn btn-sm btn-outline-success">Feature</button>
+
+
+                        </form>
+                    </td>
+                @else
+
+                    <td>
+                        <form action="{{route('categories.disable-feature' , $category->id)}}" method="post">
+                            @csrf
+                            {{--  form method spoofing--}}
+                            <button class="btn btn-sm btn-outline-danger">Disable Feature</button>
+
+
+                        </form>
+                    </td>
+                @endif
                 <td>
-                    <a href="{{route('categories.edit' , $category->id)}}" class="btn btn-sm btn-outline-success">Edit</a>
+                <a href="{{route('categories.edit' , $category->id)}}" class="btn btn-sm btn-outline-success">Edit</a>
                 </td>
                 <td>
-                    <form action="{{route('categories.destroy' , $category->id)}}" method="post">
+                <form action="{{route('categories.destroy' , $category->id)}}" method="post">
                         @csrf
-                      {{--  form method spoofing--}}
+                        {{--  form method spoofing--}}
                         @method('delete')
                         <button class="btn btn-sm btn-outline-danger">Delete</button>
 

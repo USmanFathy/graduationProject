@@ -62,17 +62,7 @@ class CheckOutController extends Controller
                     'price' => $item->product->price
                 ]);
 //                TODO: make payment here by varaiable $payment and check if success and book is pdf send email if not pdf send the book is paid and admin well contact with you
-                $firstIteration = true;
-//                if ($payment){
-//                    $user =auth()->user();
-//                    if ($item->product->type == 'pdf'){
-//                        $product = $item->product;
-//                        event(new DownloadPdfAfterPaymentSuccess($user ,$product));
-//                    }
-//                    else if ($firstIteration){
-//                        event(new PaymentSuccess($user));
-//                    }
-//                }
+
             }
 
             foreach ($request->post('address')as $type =>$address)

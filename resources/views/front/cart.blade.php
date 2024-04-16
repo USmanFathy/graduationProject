@@ -89,18 +89,6 @@
                     <!-- Total Amount -->
                     <div class="total-amount">
                         <div class="row">
-                            <div class="col-lg-8 col-md-6 col-12">
-                                <div class="left">
-                                    <div class="coupon">
-                                        <form action="#" target="_blank">
-                                            <input name="Coupon" placeholder="Enter Your Coupon">
-                                            <div class="button">
-                                                <button class="btn">Apply Coupon</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-lg-4 col-md-6 col-12">
                                 <div class="right">
                                     <ul>
@@ -111,7 +99,7 @@
                                     </ul>
                                     <div class="button">
                                         <a href="{{route('checkout.index')}}" class="btn">Checkout</a>
-                                        <a href="product-grids.html" class="btn btn-alt">Continue shopping</a>
+                                        <a href="{{route('home')}}" class="btn btn-alt">Continue shopping</a>
                                     </div>
                                 </div>
                             </div>

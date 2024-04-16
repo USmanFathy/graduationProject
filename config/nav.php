@@ -35,14 +35,14 @@ return [
         'route' => 'orders.index',
         'title' => 'Order',
         'badge' => 'New',
-        'active' => 'admins.*',
+        'active' => 'orders.*',
     ]
     ,[
         'icon'  => 'fas fa-box nav-icon',
         'route' => 'borrows.index',
         'title' => 'Borrow Requests',
         'badge' => 'New',
-        'active' => 'admins.*',
+        'active' => 'borrows.*',
     ],
 
 ];

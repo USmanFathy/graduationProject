@@ -74,7 +74,7 @@ Route::get('order/{order}/test', [PaymentsController::class, 'test'])->name('ord
 
 
 require __DIR__.'/dashboard.php';
-require __DIR__.'/auth.php';
+//require __DIR__.'/auth.php';
 
 
 
