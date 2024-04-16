@@ -6,6 +6,7 @@ use App\Http\Controllers\Front\Auth\TwoFactorAuthController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\front\CheckOutController;
 use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\PaymentsController;
 use App\Http\Controllers\Front\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +56,22 @@ Route::get('borrowing/create/{product}', [BorrowController::class, 'create'])->n
 
 Route::get('contactus', [ContactUsController::class,'index'])->name('contactus');
 Route::post('contactus', [ContactUsController::class,'send'])->name('contactus');
+
+
+
+//// payments
+Route::get('order/{order}/payments', [PaymentsController::class, 'index'])->name('order.payments.index');
+Route::post('order/{order}/stripe/paymentIntent/create', [PaymentsController::class, 'createStripePaymentIntent'])
+    ->name('stripe.paymentsIntent.create');
+Route::post('order/{order}/pay/stripe/callback', [PaymentsController::class, 'confirm'])
+    ->name('stripe.return');
+
+Route::get('order/{order}/test', [PaymentsController::class, 'test'])->name('order.payments.test');
+
+
+
+
+
 
 require __DIR__.'/dashboard.php';
 require __DIR__.'/auth.php';
