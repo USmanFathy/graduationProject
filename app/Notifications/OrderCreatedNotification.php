@@ -34,7 +34,7 @@ class OrderCreatedNotification extends Notification
 //            $channels[] ='vonage';
 //            return $channels;
 //        };
-        return ['mail' , 'database' ,'broadcast'];
+        return ['mail' , 'database' ];
     }
 
     /**
@@ -64,16 +64,16 @@ class OrderCreatedNotification extends Notification
         ];
     }
 
-    public function toBroadcast($notifiable){
-        $addr = $this->order->billingAddreses;
-
-        return new BroadcastMessage([
-            'message' => "A New Order (#{$this->order->number}) created by {$addr->full_name} from {$addr->country_name}.",
-            'icon'    => 'fas fa-file',
-            'url'     => '/dashboard',
-            'order_id' => $this->order->id
-        ]);
-    }
+//    public function toBroadcast($notifiable){
+//        $addr = $this->order->billingAddreses;
+//
+//        return new BroadcastMessage([
+//            'message' => "A New Order (#{$this->order->number}) created by {$addr->full_name} from {$addr->country_name}.",
+//            'icon'    => 'fas fa-file',
+//            'url'     => '/dashboard',
+//            'order_id' => $this->order->id
+//        ]);
+//    }
     /**
      * Get the array representation of the notification.
      *

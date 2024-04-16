@@ -7,11 +7,15 @@
             <span class="badge badge-warning navbar-badge">{{$newCount}}</span>
             @endif
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="font-size: 14px; /* Adjust font size as needed */
+    line-height: 1.5; /* Adjust line height as needed */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;">
             <span class="dropdown-header">{{$newCount}} Notifications</span>
             @foreach($notifications as $notification)
             <div class="dropdown-divider"></div>
-            <a href="{{$notification->data['url']}}?notification_id= {{$notification->id}}" class="dropdown-item @if($notification->unread()) text-bold @endif">
+            <a href="{{route('orders.index')}}" class="dropdown-item @if($notification->unread()) text-bold @endif">
                 <i class="{{$notification->data['icon']}} mr-2"></i> {{$notification->data['message']}}
                 <span class="float-right text-muted text-sm">{{$notification->created_at->diffForHumans()}}</span>
             </a>

@@ -40,13 +40,13 @@ class CheckOutController extends Controller
 
         ]);
         $order_author = $cart->get()->groupBy('product.author')->all();
-//        dd($order_store);
         DB::beginTransaction();
         try {
 
             $order = Order::create([
                 'user_id' => auth()->id(),
                 'payment_method' =>'cod',
+                'total' =>0
             ]);
 
             foreach ($order_author as $store_id => $product){
@@ -54,6 +54,8 @@ class CheckOutController extends Controller
 
 
             foreach ($product as $item){
+                $total = $item->quantity * $item->product->price;
+                $order->total += $total;
                 $orderItem =OrderItem::create([
                     'order_id' => $order->id,
                     'product_id' => $item->product_id,
@@ -61,10 +63,8 @@ class CheckOutController extends Controller
                     'quantity' => $item->quantity,
                     'price' => $item->product->price
                 ]);
-//                TODO: make payment here by varaiable $payment and check if success and book is pdf send email if not pdf send the book is paid and admin well contact with you
-
             }
-
+            $order->save();
             foreach ($request->post('address')as $type =>$address)
             {
                 $address['type'] = $type;

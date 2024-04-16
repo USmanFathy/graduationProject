@@ -104,18 +104,11 @@
                                                 <div class="single-form form-default">
                                                     <label>Country</label>
                                                     <div class="form-input form">
-                                                        <x-form.select name="address[billing][country]"  :options="$countries" selected=""/>
+                                                        <x-form.select name="address[billing][country]"  :options="$countries" selected="" title="Select Country"/>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-12">
-                                                <div class="single-checkbox checkbox-style-3">
-                                                    <input type="checkbox" id="checkbox-3">
-                                                    <label for="checkbox-3"><span></span></label>
-                                                    <p>My delivery and mailing addresses are the same.</p>
-                                                </div>
-                                            </div>
                                             <div class="col-md-12">
                                                 <div class="single-form button">
                                                     <button class="btn" data-bs-toggle="collapse" type="submit"
@@ -313,43 +306,6 @@
                             </ul>
                         </div>
                     </form>
-                </div>
-                <div class="col-lg-4">
-                    <div class="checkout-sidebar">
-                        <div class="checkout-sidebar-price-table mt-30">
-                            <h5 class="title">Pricing Table</h5>
-
-                            <div class="sub-total-price">
-                                <div class="total-price">
-                                    <p class="value">Subotal Price:</p>
-                                    <p class="price">$144.00</p>
-                                </div>
-                                <div class="total-price shipping">
-                                    <p class="value">Subotal Price:</p>
-                                    <p class="price">$10.50</p>
-                                </div>
-                                <div class="total-price discount">
-                                    <p class="value">Subotal Price:</p>
-                                    <p class="price">$10.00</p>
-                                </div>
-                            </div>
-
-                            <div class="total-payable">
-                                <div class="payable-price">
-                                    <p class="value">Subotal Price:</p>
-                                    <p class="price">$164.50</p>
-                                </div>
-                            </div>
-                            <div class="price-table-btn button">
-                                <a href="javascript:void(0)" class="btn btn-alt">Checkout</a>
-                            </div>
-                        </div>
-                        <div class="checkout-sidebar-banner mt-30">
-                            <a href="product-grids.html">
-                                <img src="https://via.placeholder.com/400x330" alt="#">
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

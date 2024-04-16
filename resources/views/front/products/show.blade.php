@@ -109,11 +109,7 @@
                                             <a class="btn" href=" {{ route('borrowing.create',$product) }} "><i class="fa-solid fa-handshake"></i>Borrow</a>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-12">
-                                        <div class="wish-button">
-                                            <button class="btn"><i class="lni lni-heart"></i> To Wishlist</button>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             </form>
@@ -128,35 +124,27 @@
                             <div class="info-body custom-responsive-margin">
                                 <h4>Details</h4>
                                 <p>{{ $product->description }}</p>
-                                <h4>Features</h4>
-                                <ul class="features">
-                                    <li>Capture 4K30 Video and 12MP Photos</li>
-                                    <li>Game-Style Controller with Touchscreen</li>
-                                    <li>View Live Camera Feed</li>
-                                    <li>Full Control of HERO6 Black</li>
-                                    <li>Use App for Dedicated Camera Operation</li>
-                                </ul>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-12">
-                            <div class="info-body">
-                                <h4>Specifications</h4>
-                                <ul class="normal-list">
-                                    <li><span>Weight:</span> 35.5oz (1006g)</li>
-                                    <li><span>Maximum Speed:</span> 35 mph (15 m/s)</li>
-                                    <li><span>Maximum Distance:</span> Up to 9,840ft (3,000m)</li>
-                                    <li><span>Operating Frequency:</span> 2.4GHz</li>
-                                    <li><span>Manufacturer:</span> GoPro, USA</li>
-                                </ul>
-                                <h4>Shipping Options:</h4>
-                                <ul class="normal-list">
-                                    <li><span>Courier:</span> 2 - 4 days, $22.50</li>
-                                    <li><span>Local Shipping:</span> up to one week, $10.00</li>
-                                    <li><span>UPS Ground Shipping:</span> 4 - 6 days, $18.00</li>
-                                    <li><span>Unishop Global Export:</span> 3 - 4 days, $25.00</li>
-                                </ul>
-                            </div>
-                        </div>
+{{--                        <div class="col-lg-6 col-12">--}}
+{{--                            <div class="info-body">--}}
+{{--                                <h4>Specifications</h4>--}}
+{{--                                <ul class="normal-list">--}}
+{{--                                    <li><span>Weight:</span> 35.5oz (1006g)</li>--}}
+{{--                                    <li><span>Maximum Speed:</span> 35 mph (15 m/s)</li>--}}
+{{--                                    <li><span>Maximum Distance:</span> Up to 9,840ft (3,000m)</li>--}}
+{{--                                    <li><span>Operating Frequency:</span> 2.4GHz</li>--}}
+{{--                                    <li><span>Manufacturer:</span> GoPro, USA</li>--}}
+{{--                                </ul>--}}
+{{--                                <h4>Shipping Options:</h4>--}}
+{{--                                <ul class="normal-list">--}}
+{{--                                    <li><span>Courier:</span> 2 - 4 days, $22.50</li>--}}
+{{--                                    <li><span>Local Shipping:</span> up to one week, $10.00</li>--}}
+{{--                                    <li><span>UPS Ground Shipping:</span> 4 - 6 days, $18.00</li>--}}
+{{--                                    <li><span>Unishop Global Export:</span> 3 - 4 days, $25.00</li>--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
 {{--                <div class="row">--}}

@@ -46,9 +46,12 @@
                         </div>
                         <div class="modal-body">
                             <ul>
-                                @foreach($order->products as $product)
-                                    <li>Product Name :{{$product->$product_name}}</li>
-                                    <li>Product Price :{{$product->$product_price}}</li>
+                                @foreach($order->items as $product)
+                                    <li>
+                                        <span style="font-weight: bold;">Product Name:</span> {{$product->name}} ||
+                                        <span style="font-weight: bold;">Product Price:</span> {{$product->price}} ||
+                                        <span style="font-weight: bold;">Quantity:</span> {{$product->quantity}}
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
