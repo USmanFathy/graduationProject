@@ -49,14 +49,12 @@
                     <div class="top-left">
                         <ul class="menu-top-link">
                             <li>
-                                <div class="select-position">
-                                    <select id="select4">
-                                        <option value="0" selected>$ USD</option>
-                                    </select>
-                                </div>
+
+                                        EG
+
                             </li>
                             <li>
-                                <ul>
+                                <ul class="useful-links">
 
                                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                         <li>
@@ -291,12 +289,7 @@
                             <img src="{{asset('assets/images/footer/credit-cards-footer.png')}}" alt="#">
                         </div>
                     </div>
-                    <div class="col-lg-4 col-12">
-                        <div class="copyright">
-                            <p>Designed and Developed by<a href="https://graygrids.com/" rel="nofollow"
-                                                           target="_blank">GrayGrids</a></p>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
