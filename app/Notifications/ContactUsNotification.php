@@ -36,9 +36,9 @@ class ContactUsNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->line('this request to contact '.$this->data['email'])
-                    ->line('the reason of contact'.$this->data['message']);
+                    ->line('new request to connection')
+                    ->line('this request to contact from  : '.$this->data['email'])
+                    ->line('the reason of contact : '.$this->data['message']);
     }
 
     /**
