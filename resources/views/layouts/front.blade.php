@@ -20,13 +20,8 @@
 </head>
 
 <body>
-<!--[if lte IE 9]>
-<p class="browserupgrade">
-    You are using an <strong>outdated</strong> browser. Please
-    <a href="https://browsehappy.com/">upgrade your browser</a> to improve
-    your experience and security.
-</p>
-<![endif]-->
+
+
 
 <!-- Preloader -->
 <div class="preloader">
@@ -72,8 +67,7 @@
                     <div class="top-middle">
                         <ul class="useful-links">
                             <li><a href="{{route('home')}}">@lang('app.home')</a></li>
-                            <li><a href="about-us.html">{{__('app.about')}}</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="{{route('contactus')}}">Contact Us</a></li>
                         </ul>
                     </div>
                 </div>

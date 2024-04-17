@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactUsEmail;
+use App\Models\Admin;
 use App\Notifications\ContactUsNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -18,7 +19,10 @@ class ContactUsController extends Controller
     public function send(Request $request)
     {
         $data = $request->all();
-        Notification::send(env('CONTACT_US_EMAIL'), new ContactUsNotification($data));
+        $admins = Admin::all();
+        foreach ($admins as $admin){
+            $admin->notify(new ContactUsNotification($data));
+        }
         return redirect()->back()->with('success','the mail was sent successfully');
 
     }

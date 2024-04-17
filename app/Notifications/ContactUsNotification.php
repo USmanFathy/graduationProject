@@ -38,6 +38,8 @@ class ContactUsNotification extends Notification
         return (new MailMessage)
                     ->line('new request to connection')
                     ->line('this request to contact from  : '.$this->data['email'])
+                    ->line('the name of contact : '.$this->data['name'])
+                    ->line('the phone of contact : '.$this->data['phone'])
                     ->line('the reason of contact : '.$this->data['message']);
     }
 
