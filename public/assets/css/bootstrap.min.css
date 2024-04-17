@@ -3118,14 +3118,14 @@ fieldset:disabled .btn {
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #0b5ed7;
+    background-color: #aad1af;
     border-color: #298e0c
 }
 
 .btn-check:focus+.btn-primary,
 .btn-primary:focus {
     color: #fff;
-    background-color: #0b5ed7;
+    background-color: #aad1af;
     border-color: #298e0c;
     box-shadow: 0 0 0 .25rem rgba(49, 132, 253, .5)
 }
