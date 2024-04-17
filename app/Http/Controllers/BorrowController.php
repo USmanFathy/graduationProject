@@ -34,12 +34,12 @@ class BorrowController extends Controller
     {
         $validatedData = $request->validated();
         $validatedData['user_id'] = auth()->id();
-//        dd($validatedData);
         try {
 
             $borrow->create($validatedData);
+            return redirect()->route('home')->with('success','Your Borrow Request Has Been Submit Please Wait until admin contact with You ');
         } catch (\PDOException $exception){
-            dd($exception);
+
         }
 //        dd($borrow);
         return redirect()->route('borrowing.index');
