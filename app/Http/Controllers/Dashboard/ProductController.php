@@ -199,5 +199,29 @@ class ProductController extends Controller
             ->with('danger' , 'Book Disabled Featured!');
     }
 
+    public function import(Request $request)
+    {
+        $file = $request->file('file');
+        $rules = [
+            'Name' => 'required|string|unique:products,name',
+            'Category' => 'required|exists:categories,name'
+        ];
+
+        $columnHeaders =  ['Name','Description','Category' ,'Reference Number' ,'Price' ,'Author'];
+        $needed_columns = ['Name' => 'name','Description'=>'description','Category'=>'category_id' ,'Reference Number'=>'reference_number' ,'Price'=>'price','Author'=>'author']; // Dynamic array of column headers
+        $relationNames = ['category' => ['column' => 'name', 'display' => 'Category', 'foreign_key' => 'category_id', 'model' => new Category()]]; // Dynamic array of relation names
+
+        try{
+            $this->excelService->import($file, $rules,new Product() ,$columnHeaders,$relationNames,$needed_columns  );
+
+            return redirect()->route('products.index')
+                ->with('success' , 'Books imported successfully!');
+        } catch (\Exception $e) {
+
+
+            return redirect()->route('products.index')
+                ->with('danger' , 'Books import has been crashed!');        }
+
+    }
 
 }

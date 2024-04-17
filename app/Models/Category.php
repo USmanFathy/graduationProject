@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class  Category extends Model
 {
@@ -29,7 +30,12 @@ class  Category extends Model
 //    public function ScopeStatus(Builder $builder , $status){
 //        $builder->where('status','=',$status);
 //    }
-
+        public static function booted()
+        {
+            static::creating(function (Category $category){
+                $category->slug = Str::slug($category->name);
+            });
+        }
     public function subcategories()
     {
         return $this->hasMany(Category::class, 'parent_id');

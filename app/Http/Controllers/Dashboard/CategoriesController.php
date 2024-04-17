@@ -74,9 +74,7 @@ class CategoriesController extends Controller
 //            ],
 //            'status' => 'in:active,archived'
 //        ]);
-        $request->merge([
-            'slug'=>Str::slug($request->post('name')),
-        ]);
+
         $data = $request->except('image');
 //        if ($request->hasFile('image')){
 //            $file =$request->file('image'); //uploaded file

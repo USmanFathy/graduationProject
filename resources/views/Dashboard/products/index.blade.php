@@ -6,9 +6,33 @@
 @endsection
 @section('content')
 
+    <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="importModalLabel">Import Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Your Form -->
+                    <form action="{{route('products.import')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Choose File</label>
+                            <input type="file" class="form-control" id="file" name="file">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Import</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="mb-5">
-        <a href="{{route('products.create')}}" class="btn btn-sm btn-outline-primary mr-2">Create</a>
+        <button type="submit" class="btn btn-sm btn-outline-success mr-2"  id="importButton">Import By Excel</button>
         <a href="{{route('products.trash')}}" class="btn btn-sm btn-outline-dark">Trash</a>
     </div>
     <x-alert type="success"/>
@@ -104,3 +128,16 @@
     <!-- /.row -->
 
 @endsection
+@push('js')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-jzWKn4/f+8R3z/z12DJUqYQf6pbiEqJ2oY0XoWdeKbQrWfmCFBVq0Q6iOx8/LxjH" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('#importButton').click(function(){
+                $('#importModal').modal('show');
+            });
+        });
+    </script>
+
+@endpush

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dashboard\AdminController;
 use App\Http\Controllers\Dashboard\BorrowDashboardController;
 use App\Http\Controllers\Dashboard\CategoriesController;
+use App\Http\Controllers\Dashboard\CategoryImportController;
 use App\Http\Controllers\Dashboard\DashboardConroller;
 use App\Http\Controllers\Dashboard\OrdersDashboardController;
 use App\Http\Controllers\Dashboard\ProductController;
@@ -21,12 +22,14 @@ Route::group([
     Route::put('/categories/{category}/restore' , [CategoriesController::class , 'restore'])->name('categories.restore');
     Route::post('/categories/{category}/Feature' , [CategoriesController::class , 'enableFeature'])->name('categories.feature');
     Route::post('/categories/{category}/Disable-Feature' , [CategoriesController::class , 'disableFeature'])->name('categories.disable-feature');
+    Route::post('/categories/import' , [CategoryImportController::class ,'import'])->name('categories.import');
     Route::delete('/categories/{category}/force-delete' , [CategoriesController::class , 'force_delete'])->name('categories.force-delete');
     Route::resource('categories' , CategoriesController::class);
     ///////////////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////Products////////////////////////////////////////
     Route::get('/products/trash' , [ProductController::class , 'trash'])->name('products.trash');
+    Route::post('/products/import' , [ProductController::class ,'import'])->name('products.import');
     Route::post('/products/{product}/Feature' , [ProductController::class, 'enableFeature'])->name('products.feature');
     Route::post('/products/{product}/Disable-Feature' , [ProductController::class , 'disableFeature'])->name('products.disable-feature');
     Route::put('/products/{product}/restore' , [ProductController::class , 'restore'])->name('products.restore');
