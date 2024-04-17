@@ -172,14 +172,14 @@
 
                             @foreach ($categoriesWithSubcategories as $categoryGroup)
                                 <li>
-                                    <a href="{{route('front.products.index')}}?filter[category.slug]={{ $categoryGroup->name }}">
+                                    <a href="{{route('front.products.index')}}?filter[category.slug]={{ $categoryGroup->slug }}">
                                         {{ $categoryGroup->name }} <i class="lni lni-chevron-right"></i>
                                     </a>
                                     @if (!$categoryGroup['subcategories']->count() < 0)
                                         <ul class="inner-sub-category">
                                             @foreach ($categoryGroup['subcategories'] as $subcategory)
                                                 <li>
-                                                    <a href="{{route('front.products.index')}}?filter[category.slug]={{ $subcategory->name }}">
+                                                    <a href="{{route('front.products.index')}}?filter[category.slug]={{ $subcategory->slug }}">
                                                         {{ $subcategory->name }}
                                                     </a>
                                                 </li>

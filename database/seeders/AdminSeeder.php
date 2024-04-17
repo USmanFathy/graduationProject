@@ -14,14 +14,9 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         Admin::create([
-            'first_name'     => 'usman',
-            'last_name'     => 'ahmed',
-            'username'     => 'usman ahmed',
-            'city'        =>'cairo',
+            'name'     => 'usman ahmed',
             'email'    => 'usmanahmedfathy@gmail.com',
-            'country' =>'en',
             'password' => Hash::make('12345678'),
-            'phone_number' => '01553524657',
         ]);
 
 

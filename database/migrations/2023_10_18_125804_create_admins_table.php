@@ -13,22 +13,12 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('email')->unique();
-            $table->string('username')->unique();
-            $table->string('phone_number')->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('super_admin')->default(false);
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->date('birthday')->nullable();
-            $table->enum('gender' , ['male' , 'female'])->nullable();
-            $table->string('street_address')->nullable();
-            $table->string('city');
-            $table->string('state')->nullable();
-            $table->string('postal_code')->nullable();
-            $table->char('country' , 2);
-            $table->char('local',2)->default('en');
-            $table->enum('status',['active' ,'inactive'])->default('active');
+            $table->string('phone_number')->nullable()->unique();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

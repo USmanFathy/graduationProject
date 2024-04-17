@@ -33,6 +33,7 @@
 
     <div class="mb-5">
         <button type="submit" class="btn btn-sm btn-outline-success mr-2"  id="importButton">Import By Excel</button>
+        <a href="{{route('products.create')}}" class="btn btn-sm btn-outline-primary">Create</a>
         <a href="{{route('products.trash')}}" class="btn btn-sm btn-outline-dark">Trash</a>
     </div>
     <x-alert type="success"/>

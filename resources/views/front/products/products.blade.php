@@ -27,7 +27,7 @@
                             <ul class="list">
                                 @foreach($categoriesWithSubcategories as $category)
                                 <li>
-                                    <a href="{{route('front.products.index')}}?filter[category.slug]={{ $category->name }}">{{$category->name}}</a><span>({{$category['products']->count()}})</span>
+                                    <a href="{{route('front.products.index')}}?filter[category.slug]={{ $category->slug }}">{{$category->name}}</a><span>({{$category['products']->count()}})</span>
                                 </li>
                                     @endforeach
 
