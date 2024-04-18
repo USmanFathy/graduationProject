@@ -36,6 +36,19 @@ class ProductController extends Controller
         return view('front.products.products', compact('products'));
     }
 
+    public function autocomplete(Request $request)
+    {
+        $query = $request->term;
+
+        $results = Product::with('category')
+            ->where('name', 'LIKE', "%{$query}%")
+            ->orWhere('author', 'LIKE', "%{$query}%")
+            ->orWhereHas('category', function($q) use ($query) {
+                $q->where('slug', 'LIKE', "%{$query}%");
+            })->pluck('name');
+
+        return response()->json($results->toArray());
+    }
 
 
     public function show(Product $product)

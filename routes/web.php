@@ -30,6 +30,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 //    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 //    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 //});
+Route::get('/autocomplete', [ProductController::class, 'autocomplete'])->name('autocomplete');
 Route::get('/products/search', [ProductController::class, 'search'])->name('front.products.search');
 Route::group(['prefix' => LaravelLocalization::setLocale()], function() {
     Route::get('/', [HomeController::class, 'index'])->name('home');

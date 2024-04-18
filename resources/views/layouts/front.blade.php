@@ -8,6 +8,8 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/favicon.svg')}}" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 
     <!-- ========================= CSS here ========================= -->
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}" />
@@ -122,12 +124,15 @@
                     <div class="main-menu-search">
                         <!-- navbar search start -->
                         <div class="navbar-search search-style-5">
+
+
                             <div class="search-input">
-                                <input type="text" name="q" id="q" placeholder="Search">
+                                    <input type="text" name="q" id="q" placeholder="Search">
                             </div>
                             <div class="search-btn">
                                 <button onclick="searchAndRedirect()"><i class="lni lni-search-alt"></i></button>
                             </div>
+
                         </div>
 
                         <!-- navbar search Ends -->
@@ -302,6 +307,9 @@
 <script src="{{asset('assets/js/tiny-slider.js')}}"></script>
 <script src="{{asset('assets/js/glightbox.min.js')}}"></script>
 <script src="{{asset('assets/js/main.js')}}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+
 <script>
     document.querySelector('.search-btn button').addEventListener('click', searchAndRedirect);
     function searchAndRedirect(event) {
@@ -323,8 +331,45 @@
     }
 
 </script>
-
-@stack('js')
+<script>
+    $(function() {
+        $("#q").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "/autocomplete",
+                    dataType: "json",
+                    data: {
+                        term: request.term
+                    },
+                    success: function(data) {
+                        // Check if data is an array
+                        if (Array.isArray(data)) {
+                            response(data.map(function(item) {
+                                return {
+                                    label: item,
+                                    value: item
+                                };
+                            }));
+                        } else {
+                            response([]);
+                        }
+                    }
+                });
+            },
+            minLength: 2,
+            select: function(event, ui) {
+                // Redirect or perform any other action when a result is selected
+                // For now, just log the selected value
+                console.log(ui.item.value);
+            }
+        }).autocomplete("instance")._renderItem = function(ul, item) {
+            return $("<li>")
+                .append("<div>" + item.label + "</div>")
+                .appendTo(ul);
+        };
+    });
+    </script>
+    @stack('js')
 </body>
 
 </html>
