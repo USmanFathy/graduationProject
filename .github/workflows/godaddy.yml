@@ -14,9 +14,9 @@ jobs:
     - name: FTP Deploy
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-        server: s3.serv00.com
-        username: usmanahmed
-        password: ggnjEG55g!!$qf531E0B
+        server: ftps://s3.serv00.com
+        username: f8664_usman
+        password: UsmanAhmed12
 
         protocol: ftps
         server-dir: /usr/home/usmanahmed/
