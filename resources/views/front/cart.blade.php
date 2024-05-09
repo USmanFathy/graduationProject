@@ -67,11 +67,11 @@
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-2 col-12">
-                            <p>{{Currency::format($item->quantity*$item->product->price)}}</p>
+                            <p>{{$item->quantity*$item->product->price}}</p>
                         </div>
                         <div class="col-lg-2 col-md-2 col-12">
                             @if($item->product->compare_price)
-                            <p>{{Currency::format($item->product->compare_price * $item->quantity)}}</p>
+                            <p>{{$item->product->compare_price * $item->quantity}}</p>
                             @endif
                         </div>
                         <div class="col-lg-1 col-md-2 col-12">
@@ -92,7 +92,7 @@
                             <div class="col-lg-4 col-md-6 col-12">
                                 <div class="right">
                                     <ul>
-                                        <li>Cart Subtotal<span>{{Currency::format($cart->total())}}</span></li>
+                                        <li>Cart Subtotal<span>{{$cart->total()}}</span></li>
                                     </ul>
                                     <div class="button">
                                         <a href="{{route('checkout.index')}}" class="btn">Checkout</a>

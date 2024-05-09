@@ -42,9 +42,6 @@ class ProductController extends Controller
     {
         $request->validate([
             'name'      =>'required|string|min:3|max:255',
-            'image'    =>[
-                'image','max:1048576','dimensions:min_width=150 , min_height=100'
-            ],
             'status' => 'in:active,archived,draft',
             'attachment' => 'required_if:type,==,pdf'
         ]);

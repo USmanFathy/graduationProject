@@ -59,6 +59,7 @@
             <th>Name</th>
             <th>Category</th>
             <th>Price</th>
+            <th>Year</th>
             <th>status</th>
             <th>Created At</th>
             <th></th>
@@ -74,7 +75,8 @@
                 <td>{{$product->id}}</td>
                 <td>{{$product->name}}</td>
                 <td>{{$product->category->name ?? ""}}</td>
-                <td>{{Currency::format($product->price)}}</td>
+                <td>${{$product->price}}</td>
+                <td>{{$product->reference_number}}</td>
                 <td>{{$product->status}}</td>
                 <td>{{$product->created_at}}</td>
                 @if($product->featured == 0)

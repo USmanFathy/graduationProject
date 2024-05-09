@@ -13,7 +13,6 @@
         <tr>
             <th>Image</th>
             <th>Name</th>
-            <th>Store</th>
             <th>Status</th>
             <th>Created At</th>
 
@@ -22,7 +21,7 @@
         <tbody>
         @php
 
-        $products = $category->products()->with('store')->paginate(5);
+        $products = $category->products()->paginate(5);
 
         @endphp
 
@@ -30,7 +29,6 @@
             <tr>
                 <td><img height="50" src="{{asset('storage/'.$product->image)}}"></td>
                 <td>{{$product->name}}</td>
-                <td>{{$product->store->name }}</td>
                 <td>{{$product->status}}</td>
                 <td>{{$product->created_at}}</td>
 
