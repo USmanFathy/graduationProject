@@ -16,10 +16,10 @@ jobs:
       with:
         server: s3.serv00.com
         username: f8664_usman
-        password: UsmanAhmed12
+        password: ggnjEG55g!!$qf531E0B
 
         protocol: ftp
-        server-dir:  /usr/home/usmanahmed/domains/usmanahmed.serv00.net/public_html/
+        server-dir:  /
         local-dir: ./
         exclude: .git*, .env, .github, storage/*.key
   
