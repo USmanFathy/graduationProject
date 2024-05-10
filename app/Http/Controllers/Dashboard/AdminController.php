@@ -16,7 +16,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admins = Admin::whereId('id',auth()->guard('admin')->user()->id)->paginate();
+        $admins = Admin::where('id','!=',auth()->guard('admin')->user()->id)->paginate();
 
         return view('Dashboard.admins.index' ,['admins'=>$admins]);
     }

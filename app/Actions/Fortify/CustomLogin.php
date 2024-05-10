@@ -3,22 +3,25 @@
 namespace App\Actions\Fortify;
 
 use App\Models\Admin;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class CustomLogin
 {
-public function login($request){
+    public static function login($request, $guard)
+    {
+        $credentials = $request->only('email', 'password');
 
-    $user_name = $request->post(config('fortify.username'));
-    $password = $request->post('password');
+        if ($guard === 'admin') {
+            $user = Admin::where('email', $credentials['email'])->first();
+        } else {
+            $user = User::where('email', $credentials['email'])->first();
+        }
 
-    $user = Admin::whereEmail($user_name)
-                    ->orwhere('username',$user_name)
-                    ->orwhere('phone_number',$user_name)->first();
+        if ($user && Hash::check($credentials['password'], $user->password)) {
+            return $user; // Return the authenticated user object
+        }
 
-    if ($user && Hash::check($password , $user->password)) {
-        return $user;
-    }
-    return false;
-}
-}
+        return null;
+    }}

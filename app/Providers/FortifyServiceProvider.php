@@ -31,6 +31,13 @@ class FortifyServiceProvider extends ServiceProvider
                 'fortify.prefix' => 'admin'
             ]);
         }
+        else{
+            Config::set([
+                'fortify.guard' => 'web',
+                'fortify.passwords' => 'users',
+                'fortify.prefix' => ''
+            ]);
+        }
 
         $this->app->instance(LoginResponse::class , new class implements LoginResponse{
             public function toResponse($request)
@@ -63,15 +70,22 @@ class FortifyServiceProvider extends ServiceProvider
 
 
 
-//        Fortify::loginView(function (){
-//            if (Config::get('fortify.guard' == 'web')){
-//                return view('front.auth.login');
-//            }
-//            return view('auth.login');
-//        });
+        Fortify::loginView(function (){
+            if (Config::get('fortify.guard' == 'web')){
+                return view('front.auth.login');
+            }
+            return view('auth.login');
+        });
 //        Fortify::registerView('auth.register');
 //        Fortify::requestPasswordResetLinkView('auth.forgot-password');
 
+        Fortify::authenticateUsing(function (Request $request) {
+            if ($request->is('admin/*')) {
+                return CustomLogin::login($request, 'admin');
+            } else {
+                return CustomLogin::login($request, 'web');
+            }
+        });
         if (Config::get('fortify.guard' ) == 'web') {
             Fortify::viewPrefix('front.auth.');
             Fortify::registerView('front.auth.register');
@@ -79,7 +93,7 @@ class FortifyServiceProvider extends ServiceProvider
 
         }else{
             Fortify::viewPrefix('auth.');
-            Fortify::authenticateUsing([new CustomLogin , 'login']);
+            Fortify::redirects('dashboard');
 
         }
 
