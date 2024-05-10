@@ -118,7 +118,7 @@
             </tr>
         @empty
             <tr>
-                <td colspan="7" >No products Defined .</td>
+                <td colspan="7" >No books Defined .</td>
             </tr>
         @endforelse
 

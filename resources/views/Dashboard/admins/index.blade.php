@@ -27,9 +27,6 @@
             <th>Id</th>
             <th>Name</th>
             <th>Email</th>
-            <th>UserName</th>
-            <th>PhoneNumber</th>
-            <th>status</th>
             <th>Created At</th>
 
 
@@ -42,21 +39,18 @@
                 <td>{{$admin->id}}</td>
                 <td>{{$admin->name}}</td>
                 <td>{{$admin->email}}</td>
-                <td>{{$admin->username}}</td>
-                <td>{{$admin->phone_number}}</td>
-                <td>{{$admin->status}}</td>
                 <td>{{$admin->created_at}}</td>
 
-                <td>
-                    <form action="{{route('admins.destroy' , $admin->id)}}" method="post">
-                        @csrf
-                      {{--  form method spoofing--}}
-                        @method('delete')
-                        <button class="btn btn-sm btn-outline-danger">Delete</button>
+{{--                <td>--}}
+{{--                    <form action="{{route('admins.destroy' , $admin->id)}}" method="post">--}}
+{{--                        @csrf--}}
+{{--                      --}}{{--  form method spoofing--}}
+{{--                        @method('delete')--}}
+{{--                        <button class="btn btn-sm btn-outline-danger">Delete</button>--}}
 
 
-                    </form>
-                </td>
+{{--                    </form>--}}
+{{--                </td>--}}
             </tr>
         @empty
             <tr>
