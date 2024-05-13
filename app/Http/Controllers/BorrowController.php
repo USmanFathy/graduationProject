@@ -18,6 +18,18 @@ class BorrowController extends Controller
         return view('front.borrow.index',compact('borrowing'));
     }
 
+    public function viewPdf(Product $product, Borrow $borrow)
+    {
+        // Get the current date
+        $currentDate = now();
+        if ($currentDate >= $borrow->from_date && $currentDate <= $borrow->to_date) {
+            return view('Dashboard.pdf', ['book' => $product]);
+        } else {
+            abort(419);
+        }
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */

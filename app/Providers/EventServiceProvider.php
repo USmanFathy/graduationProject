@@ -3,11 +3,13 @@
 namespace App\Providers;
 
 use App\Events\ApproveBorrowRequest;
+use App\Events\ApproveBorrowRequestPDfBookEvent;
 use App\Events\DownloadPdfAfterPaymentSuccess;
 use App\Events\OrderCreated;
 use App\Events\PaymentSuccess;
 use App\Events\RejectBorrowRequest;
 use App\Listeners\ApproveBorrowRequestListener;
+use App\Listeners\ApproveBorrowRequestPdfBookListener;
 use App\Listeners\DeductProductQuatity;
 use App\Listeners\DownloadPdfAfterPaymentSuccessListener;
 use App\Listeners\EmptyCart;
@@ -46,6 +48,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         PaymentSuccess::class=>[
             PaymentSuccessListener::class
+        ],
+        ApproveBorrowRequestPDfBookEvent::class=>[
+            ApproveBorrowRequestPdfBookListener::class
         ]
     ];
 

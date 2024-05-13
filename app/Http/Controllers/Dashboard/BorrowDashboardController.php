@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Events\ApproveBorrowRequest;
+use App\Events\ApproveBorrowRequestPDfBookEvent;
 use App\Events\RejectBorrowRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBorrowRequest;
@@ -26,7 +27,11 @@ class BorrowDashboardController extends Controller
         try {
             if ($borrow->status == 'pending'){
                 $borrow->update(['status'=>'accepted']);
-                event(new ApproveBorrowRequest($borrow->user()));
+                if ($borrow->product->type == 'pdf'){(
+                    event(new  ApproveBorrowRequestPDfBookEvent($borrow->user() , $borrow->product(),$borrow)));
+                }else{
+                    event(new ApproveBorrowRequest($borrow->user()));
+                }
                 return redirect()->route('borrows.index')->with('success','Borrow Request Have Been Approved');
 
             }

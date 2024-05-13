@@ -69,7 +69,7 @@ Route::get('order/{order}/pay/stripe/callback', [PaymentsController::class, 'con
 
 Route::get('order/{order}/test', [PaymentsController::class, 'test'])->name('order.payments.test');
 
-
+Route::get('view-pdf/{product}/{borrow}',[BorrowController::class ,'viewPdf'])->name('view-pdf');
 
 
 
