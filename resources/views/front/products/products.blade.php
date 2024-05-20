@@ -90,7 +90,7 @@
                                                 </h4>
 
                                                 <div class="price">
-                                                    <span>${{$product->price}}</span>
+                                                    <span>@if($product->price) $@endif{{$product->price}}</span>
                                                 </div>
                                             </div>
                                         </div>

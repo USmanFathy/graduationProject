@@ -12,7 +12,7 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable =[
-        'name' , 'category_id' , 'author' , 'image','price', 'description','status','reference_number','type','attachment'
+        'name' , 'category_id' , 'author' , 'image','price', 'description','status','reference_number','type','attachment','number','publish_house'
     ];
 
     protected $hidden =
@@ -26,7 +26,20 @@ class Product extends Model
     protected static function booted()
     {
        static::creating(function (Product $product){
-           $product->slug = Str::slug($product->name);
+           $slug = Str::slug($product->name);
+
+           // Check for duplicates
+           $existingProduct = Product::where('slug', $slug)->first();
+
+           // Increment counter if a duplicate is found
+           $counter = 1;
+           while ($existingProduct) {
+               $slug = Str::slug($product->name) . '-' . $counter;
+               $existingProduct = Product::where('slug', $slug)->first();
+               $counter++;
+           }
+
+           $product->slug = $slug;
        });
 
         static::updating(function (Product $product){

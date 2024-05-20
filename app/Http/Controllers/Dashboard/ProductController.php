@@ -201,11 +201,11 @@ class ProductController extends Controller
         $file = $request->file('file');
         $rules = [
             'Name' => 'required|string|unique:products,name',
-            'Category' => 'required|exists:categories,name'
+            'Category' => 'exists:categories,name'
         ];
 
-        $columnHeaders =  ['Name','Description','Category' ,'Reference Number' ,'Price' ,'Author'];
-        $needed_columns = ['Name' => 'name','Description'=>'description','Category'=>'category_id' ,'Reference Number'=>'reference_number' ,'Price'=>'price','Author'=>'author']; // Dynamic array of column headers
+        $columnHeaders =  ['Name','Description','Category' ,'Reference Number' ,'Price' ,'Author' ,'Publishing House', 'Number'];
+        $needed_columns = ['Name' => 'name','Description'=>'description','Category'=>'category_id' ,'Reference Number'=>'reference_number' ,'Price'=>'price','Author'=>'author','Publishing House' =>'publish_house' ,'Number' =>'number']; // Dynamic array of column headers
         $relationNames = ['category' => ['column' => 'name', 'display' => 'Category', 'foreign_key' => 'category_id', 'model' => new Category()]]; // Dynamic array of relation names
 
         try{
@@ -215,7 +215,7 @@ class ProductController extends Controller
                 ->with('success' , 'Books imported successfully!');
         } catch (\Exception $e) {
 
-
+            dd($e);
             return redirect()->route('products.index')
                 ->with('danger' , 'Books import has been crashed!');        }
 

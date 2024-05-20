@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Str; @endphp
 @extends('layouts.dashboard')
 @section('title_section' ,'Books')
 @section('breadcrumb')
@@ -59,9 +60,11 @@
             <th>Name</th>
             <th>Category</th>
             <th>Price</th>
-            <th>Year</th>
+            <th>Reference Number</th>
+            <th>Publishing House</th>
+            <th>Number</th>
             <th>status</th>
-            <th>Created At</th>
+            <th>Author</th>
             <th></th>
             <th colspan="2"></th>
 
@@ -72,13 +75,24 @@
         @forelse($products as $product)
             <tr>
                 <td><img height="50" src="{{$product->image_url}}"></td>
-                <td>{{$product->id}}</td>
+                <td>{{$loop->iteration}}</td>
                 <td>{{$product->name}}</td>
                 <td>{{$product->category->name ?? ""}}</td>
-                <td>${{$product->price}}</td>
+                <td>@if($product->price) $@endif{{$product->price}}</td>
                 <td>{{$product->reference_number}}</td>
+                <td>{{$product->publish_house}}</td>
+                <td>{{$product->number}}</td>
                 <td>{{$product->status}}</td>
-                <td>{{$product->created_at}}</td>
+                @php
+                    $nameParts = explode(' ', $product->author);
+                    $lastWord = end($nameParts);
+
+                    if (Str::endsWith($lastWord, 'دكتور') || Str::endsWith($lastWord, 'دكتورة')) {
+                        array_unshift($nameParts, array_pop($nameParts));
+                        $name = implode(' ', $nameParts);
+                    }
+                @endphp
+                <td>{{$name}}</td>
                 @if($product->featured == 0)
                     <td>
                         <form action="{{route('products.feature' , $product->id)}}" method="post">

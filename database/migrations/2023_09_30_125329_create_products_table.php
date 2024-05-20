@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->string('attachment')->nullable();
-            $table->float('price')->default(0);
+            $table->float('price')->default(0)->nullable();
             $table->string('author');
             $table->string('reference_number');
 

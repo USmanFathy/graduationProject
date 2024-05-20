@@ -22,24 +22,37 @@ class ExcelService
                 }
                 $validation = $this->validateData($line, $rules);
 
+                $exists = $model::where($needed_columns['Name'], $line[$columnHeaders[0]])->exists();
+                if ($exists) {
+                    return;
+                }
                 if ($validation->fails()) {
                     throw new \Exception($validation->errors()->first());
                 }
 
                 $newModel = new $model;
                 foreach ($needed_columns as $key => $column) {
-                    if ($column == 'date') {
-
-                        $line[$key] = $line[$key]->format('Y-m-d');
+                    if (array_key_exists($key, $line)) {
+                        $value = $line[$key];
+                        if ($column == 'date' && $value instanceof \DateTime) {
+                            $value = $value->format('Y-m-d');
+                        }
+                        $newModel->{$column} = $value;
+                    } else {
+                        $newModel->{$column} = null;
                     }
-                    $newModel->{$column} = $line[$key];
                 }
 
                 foreach ($relationNames as $relation) {
-                    $row = $relation['model']::where($relation['column'], trim($line[$relation['display']]))->first();
-                    if ($row) {
-                        $value = $row->id;
-                        $newModel->{$relation['foreign_key']} = $value;
+                    if (array_key_exists($relation['display'], $line)) {
+                        $row = $relation['model']::where($relation['column'], trim($line[$relation['display']]))->first();
+                        if ($row) {
+                            $newModel->{$relation['foreign_key']} = $row->id;
+                        } else {
+                            $newModel->{$relation['foreign_key']} = null;
+                        }
+                    } else {
+                        $newModel->{$relation['foreign_key']} = null;
                     }
                 }
                 $newModel->save();

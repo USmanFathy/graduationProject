@@ -22,7 +22,7 @@
 {{--            <li><span>4.0 Review(s)</span></li>--}}
 {{--        </ul>--}}
         <div class="price">
-            <span>${{$product->price}}</span>
+            <span>@if($product->price) $@endif{{$product->price}}</span>
             @if($product->compare_price)
             <span class="discount-price">{{$product->compare_price}}</span>
             @endif
